@@ -1,0 +1,11 @@
+<div hflex="1" vflex="1" sclass="footer">
+	<vbox hflex="1" vflex="1" align="center">
+		Lucas Saar Cerqueira (lucas44r at gmail)
+<!-- 		<a href="http://www.ufjf.br/deptocomputacao/"> -->
+<!-- 			Departamento de Ciência da Computação -->
+<!-- 		</a> -->
+		<a href="http://www.ufjf.br">
+			Universidade Federal de Juiz de Fora
+		</a>
+	</vbox>
+</div>

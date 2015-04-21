@@ -1,0 +1,82 @@
+<?link rel="stylesheet" type="text/css" href="/style.css"?>
+<zk>
+	<borderlayout hflex="1" vflex="1">
+		<north height="100px" border="none">
+			<include src="/cabecalho.zul" />
+		</north>
+		<center id="mainContent" autoscroll="true"
+			apply="br.ufjf.hydronode.requisicoes.InsertSensor">
+			<vlayout>
+				<grid width="500px">
+					<columns>
+						<column align="right" hflex="min" />
+						<column />
+					</columns>
+					<rows>
+						<row>
+							<cell sclass="row-title">Long Name :</cell>
+							<cell>
+								<textbox id="longName"
+									constraint="no empty: Campo obrigatório" />
+							</cell>
+						</row>
+						<row>
+							<cell sclass="row-title">Identifier :</cell>
+							<cell>
+								<textbox id="identifier"
+									constraint="no empty: Campo obrigatório" width="200px" />
+							</cell>
+						</row>
+						<row>
+							<cell sclass="row-title">Oferta :</cell>
+							<cell>
+								<label id="oferta"
+									value="hydronode.ufjf.br/oferta/" />
+							</cell>
+						</row>
+						<row>
+							<cell sclass="row-title">
+								Localização :
+							</cell>
+							<cell>
+								<textbox id="localizacao"
+									constraint="no empty: Campo obrigatório" width="200px" />
+							</cell>
+						</row>
+						<row>
+							<cell sclass="row-title">Saída :</cell>
+							<cell>
+								<vlayout>
+									<hlayout>
+										<label sclass="row-title"
+											value="Ontologia:" />
+										<textbox id="saidaOntologia"
+											constraint="no empty: Campo obrigatório" width="200px" />
+									</hlayout>
+									<hlayout>
+										<label sclass="row-title"
+											value="Descrição" />
+										<textbox id="saidaDescricao"
+											constraint="no empty: Campo obrigatório" width="200px" />
+									</hlayout>
+									<hlayout>
+										<label sclass="row-title"
+											value="Unidade de Medida:" />
+										<textbox id="saidaUOM"
+											constraint="no empty: Campo obrigatório" width="200px" />
+									</hlayout>
+								</vlayout>
+							</cell>
+						</row>
+					</rows>
+				</grid>
+				<hlayout>
+					<button id="enviar" label="Enviar" />
+				</hlayout>
+			</vlayout>
+		</center>
+		<south height="50px" border="none">
+			<include src="/rodape.zul" />
+		</south>
+	</borderlayout>
+</zk>

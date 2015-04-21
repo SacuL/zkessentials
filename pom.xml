@@ -6,12 +6,11 @@
 	<version>1.0.0</version>
 	<properties>
 		<zk.version>7.0.0</zk.version>
-		<maven.build.timestamp.format>yyyy-MM-dd</maven.build.timestamp.format>
+		<maven.build.timestamp.format>dd-MM-yyyy</maven.build.timestamp.format>
 		<packname>-${project.version}-FL-${maven.build.timestamp}</packname>
 	</properties>
 	<packaging>war</packaging>
-	<name>The ZK Essentials Example Project</name>
-	<description>The ZK Essentials Example Application</description>
+	<name>Projeto HydroNode</name>
 	<licenses>
 		<license>
 			<name>GNU LESSER GENERAL PUBLIC LICENSE, Version 3</name>
@@ -27,7 +26,7 @@
 		</repository>
 		<repository>
 			<id>ZK EVAL</id>
-      		<name>ZK Evaluation Repository</name>
+			<name>ZK Evaluation Repository</name>
 			<url>http://mavensync.zkoss.org/eval</url>
 		</repository>
 	</repositories>
@@ -39,6 +38,21 @@
 		</pluginRepository>
 	</pluginRepositories>
 	<dependencies>
+		<dependency>
+			<groupId>org.zkoss.addon</groupId>
+			<artifactId>flashchart</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.http-client</groupId>
+			<artifactId>google-http-client</artifactId>
+			<version>1.20.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.http-client</groupId>
+			<artifactId>google-http-client-gson</artifactId>
+			<version>1.20.0</version>
+		</dependency>
 		<dependency>
 			<groupId>org.zkoss.zk</groupId>
 			<artifactId>zkbind</artifactId>
@@ -125,6 +139,7 @@
 		</plugins>
 	</build>
 	<scm>
-		<url>https://github.com/zkoss/zkessentials</url>
+		<url>https://github.com/SacuL/zkessentials</url>
 	</scm>
+	<description>Servico Web para armazenamento e visualizacao de dados de sondas aquaticas do Projeto HydroNode.</description>
 </project>

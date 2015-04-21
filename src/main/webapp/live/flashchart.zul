@@ -1,0 +1,30 @@
+<zk>
+	<vbox>
+     <flashchart id="chart" width="570" height="300"></flashchart>
+	
+	<zscript>
+        SimpleCategoryModel model = new SimpleCategoryModel();
+        model.setValue("Serie 1", "January", new Double(1));
+		model.setValue("Serie 1", "Febrery", new Double(2));
+		model.setValue("Serie 1", "March", new Double(3));
+		model.setValue("Serie 1", "April", new Double(4));
+		model.setValue("Serie 1", "May", new Double(5));
+		model.setValue("Serie 1", "June", new Double(6));
+		model.setValue("Serie 2", "January", new Double(6));
+		model.setValue("Serie 2", "Febrery", new Double(5));
+		model.setValue("Serie 2", "March", new Double(4));
+		model.setValue("Serie 2", "April", new Double(3));
+		model.setValue("Serie 2", "May", new Double(2));
+		model.setValue("Serie 2", "June", new Double(1));
+		model.setValue("Serie 3", "January", new Double(2));
+		model.setValue("Serie 3", "Febrery", new Double(3));
+		model.setValue("Serie 3", "March", new Double(4));
+		model.setValue("Serie 3", "April", new Double(5));
+		model.setValue("Serie 3", "May", new Double(6));
+		model.setValue("Serie 3", "June", new Double(7));
+        
+        chart.setModel(model);
+        chart.setType("line");
+     </zscript>
+     </vbox>
+</zk>

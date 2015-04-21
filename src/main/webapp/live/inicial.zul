@@ -1,0 +1,60 @@
+<?page title="Página Inicial" contentType="text/html;charset=UTF-8"?>
+<zk>
+
+	<vlayout apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('br.ufjf.hydronode.GUIGrafico')">
+
+		<flashchart id="mychart" width="500" height="250" type="pie"
+			model="@bind(vm.model)" />
+	</vlayout>
+
+
+
+
+	<!-- 			<vlayout apply="org.zkoss.bind.BindComposer" -->
+	<!-- 			viewModel="@id('vm') @init('br.ufjf.hydronode.live.gui')"> -->
+	<!-- 			<grid width="200px"> -->
+	<!-- 			<columns> -->
+	<!-- 			<column label="Category" width="80px" /> -->
+	<!-- 			<column label="Value" /> -->
+	<!-- 			</columns> -->
+	<!-- 			<rows> -->
+	<!-- 			<row> -->
+	<!-- 			<label value="C/C++" /> -->
+	<!-- 			<doublebox value="@bind(vm.value1)" -->
+	<!-- 			constraint="no empty" -->
+	<!-- 			onChange="@global-command('dataChanged', category='C/C++', num=vm.value1)" /> -->
+	<!-- 			</row> -->
+	<!-- 			<row> -->
+	<!-- 			<label value="VB" /> -->
+	<!-- 			<doublebox value="@bind(vm.value2)" -->
+	<!-- 			constraint="no empty" -->
+	<!-- 			onChange="@global-command('dataChanged', category='VB', num=vm.value2)" /> -->
+	<!-- 			</row> -->
+	<!-- 			<row> -->
+	<!-- 			<label value="Java" /> -->
+	<!-- 			<doublebox value="@bind(vm.value3)" -->
+	<!-- 			constraint="no empty" -->
+	<!-- 			onChange="@global-command('dataChanged', category='Java', num=vm.value3)" /> -->
+	<!-- 			</row> -->
+	<!-- 			<row> -->
+	<!-- 			<label value="PHP" /> -->
+	<!-- 			<doublebox value="@bind(vm.value4)" -->
+	<!-- 			constraint="no empty" -->
+	<!-- 			onChange="@global-command('dataChanged', category='PHP', num=vm.value4)" /> -->
+	<!-- 			</row> -->
+	<!-- 			</rows> -->
+	<!-- 			</grid> -->
+	<!-- 			</vlayout> -->
+	
+	
+	<!--  TIMEPLOT!! http://books.zkoss.org/wiki/ZK%20Component%20Reference/Diagrams%20and%20Reports/Timeplot 
+	http://www.simile-widgets.org/timeplot/docs/
+	-->
+	
+	
+
+
+
+</zk>
+
