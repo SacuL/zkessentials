@@ -1,0 +1,110 @@
+<?link rel="stylesheet" type="text/css" href="/style.css"?>
+<zk>
+	<borderlayout hflex="1" vflex="1">
+		<north height="100px" border="none">
+			<include src="/cabecalho.zul" />
+		</north>
+		<center id="mainContent" autoscroll="true"
+			apply="br.ufjf.hydronode.requisicoes.InsertObservation">
+			<vlayout>
+				<grid width="500px">
+					<columns>
+						<column align="right" hflex="min" />
+						<column />
+					</columns>
+					<rows>
+						<row>
+							<cell sclass="row-title">Offering :</cell>
+							<cell>
+								<textbox id="oferta"
+									constraint="no empty: Campo obrigatório" />
+							</cell>
+						</row>
+						<row>
+							<cell sclass="row-title">
+								Observation Identifier :
+							</cell>
+							<cell>
+								<textbox id="observationIdentifier"
+									constraint="no empty: Campo obrigatório" width="200px" />
+							</cell>
+						</row>
+						<row>
+							<cell sclass="row-title">Procedure :</cell>
+							<cell>
+								<textbox id="procedure"
+									constraint="no empty: Campo obrigatório" width="200px" />
+							</cell>
+						</row>
+						<row>
+							<cell sclass="row-title">
+								Observed Property :
+							</cell>
+							<cell>
+								<textbox id="observedProperty"
+									constraint="no empty: Campo obrigatório" width="200px" />
+							</cell>
+						</row>
+						<row>
+							<cell sclass="row-title">
+								Feature of Interest :
+							</cell>
+							<cell>
+								<textbox id="featureOfInterest"
+									constraint="no empty: Campo obrigatório" width="200px" />
+							</cell>
+						</row>
+						<row>
+							<cell sclass="row-title">
+								Localização :
+							</cell>
+							<cell>
+								<hlayout>
+									<doublebox id="localizacaoX"
+										constraint="no empty: Campo obrigatório" width="90px" />
+									<label value="," />
+									<doublebox id="localizacaoY"
+										constraint="no empty: Campo obrigatório" width="90px" />
+								</hlayout>
+							</cell>
+						</row>
+						<row>
+							<cell sclass="row-title">
+								Phenomenon Time :
+							</cell>
+							<cell>
+								<textbox id="phenomenonTime"
+									constraint="no empty: Campo obrigatório" width="200px" />
+							</cell>
+						</row>
+						<row>
+							<cell sclass="row-title">Result :</cell>
+							<cell>
+								<vlayout>
+									<hlayout>
+										<label sclass="row-title"
+											value="Value: " />
+										<doublebox id="value"
+											constraint="no empty: Campo obrigatório" width="200px" />
+									</hlayout>
+									<hlayout>
+										<label sclass="row-title"
+											value="UOM: " />
+										<textbox id="uom"
+											constraint="no empty: Campo obrigatório" width="200px" />
+									</hlayout>
+								</vlayout>
+							</cell>
+						</row>
+					</rows>
+				</grid>
+				<hlayout>
+					<button id="enviar" label="Enviar" />
+				</hlayout>
+			</vlayout>
+		</center>
+		<south height="50px" border="none">
+			<include src="/rodape.zul" />
+		</south>
+	</borderlayout>
+</zk>

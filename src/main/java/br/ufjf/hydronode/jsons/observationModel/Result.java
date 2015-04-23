@@ -3,9 +3,9 @@ package br.ufjf.hydronode.jsons.observationModel;
 public class Result {
 
 	String uom;
-	String value;
+	Double value;
 
-	public Result(String uom, String value) {
+	public Result(String uom, Double value) {
 		super();
 		this.uom = uom;
 		this.value = value;
@@ -19,11 +19,11 @@ public class Result {
 		this.uom = uom;
 	}
 
-	public String getValue() {
+	public Double getValue() {
 		return value;
 	}
 
-	public void setValue(String value) {
+	public void setValue(Double value) {
 		this.value = value;
 	}
 

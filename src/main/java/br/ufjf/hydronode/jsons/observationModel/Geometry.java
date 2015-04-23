@@ -4,14 +4,18 @@ public class Geometry {
 
 	String type;
 	// VERIFICAR O FUNCIONAMENTO DISSO!!
-	String coordinates;
+	double[] coordinates;
 
 	// Verificar se outros campos sao necessarios
 
-	public Geometry(String type, String coordinates) {
+	public Geometry(String type, double[] coordinates) {
 		super();
 		this.type = type;
-		this.coordinates = coordinates;
+		if (coordinates.length != 2) {
+			this.coordinates = new double[] { 0, 0 };
+		} else {
+			this.coordinates = coordinates;
+		}
 	}
 
 	public String getType() {
@@ -22,11 +26,11 @@ public class Geometry {
 		this.type = type;
 	}
 
-	public String getCoordinates() {
+	public double[] getCoordinates() {
 		return coordinates;
 	}
 
-	public void setCoordinates(String coordinates) {
+	public void setCoordinates(double[] coordinates) {
 		this.coordinates = coordinates;
 	}
 

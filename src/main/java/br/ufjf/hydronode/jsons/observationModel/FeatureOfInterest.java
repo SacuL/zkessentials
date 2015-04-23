@@ -4,15 +4,12 @@ public class FeatureOfInterest {
 
 	Identifier identifier;
 	Name name;
-	String sampledFeature;
 	Geometry geometry;
 
-	public FeatureOfInterest(Identifier identifier, Name name,
-			String sampledFeature, Geometry geometry) {
+	public FeatureOfInterest(Identifier identifier, Name name, Geometry geometry) {
 		super();
 		this.identifier = identifier;
 		this.name = name;
-		this.sampledFeature = sampledFeature;
 		this.geometry = geometry;
 	}
 
@@ -30,14 +27,6 @@ public class FeatureOfInterest {
 
 	public void setName(Name name) {
 		this.name = name;
-	}
-
-	public String getSampledFeature() {
-		return sampledFeature;
-	}
-
-	public void setSampledFeature(String sampledFeature) {
-		this.sampledFeature = sampledFeature;
 	}
 
 	public Geometry getGeometry() {

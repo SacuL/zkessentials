@@ -1,4 +1,4 @@
-package br.ufjf.hydronode.jsons.observationModel;
+	package br.ufjf.hydronode.jsons.observationModel;
 
 public class Observation {
 
