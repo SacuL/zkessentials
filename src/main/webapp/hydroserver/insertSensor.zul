@@ -28,13 +28,6 @@
 							</cell>
 						</row>
 						<row>
-							<cell sclass="row-title">Offering :</cell>
-							<cell>
-								<label id="oferta"
-									value="hydronode.ufjf.br/oferta/" />
-							</cell>
-						</row>
-						<row>
 							<cell sclass="row-title">
 								Localização :
 							</cell>

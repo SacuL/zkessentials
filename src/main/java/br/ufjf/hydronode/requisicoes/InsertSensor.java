@@ -2,12 +2,10 @@ package br.ufjf.hydronode.requisicoes;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-
+import br.ufjf.hydronode.Config;
 import br.ufjf.hydronode.jsons.InsertSensorModel;
 import br.ufjf.hydronode.sensorml.Sensor;
-
 import com.google.gson.*;
-
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
@@ -19,20 +17,17 @@ import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.util.Clients;
-import org.zkoss.zul.Label;
 import org.zkoss.zul.Textbox;
 
 public class InsertSensor extends SelectorComposer<Component> {
 	private static final long serialVersionUID = 1L;
 
-	String postURL = "http://localhost:8182/52n-sos-webapp/service";
+	String postURL = Config.urlSOS;
 
 	@Wire
 	Textbox nome;
 	@Wire
 	Textbox identificador;
-	@Wire
-	Label oferta;
 	@Wire
 	Textbox localizacao;
 	@Wire
@@ -52,8 +47,10 @@ public class InsertSensor extends SelectorComposer<Component> {
 
 		InsertSensorModel modeloJson = new InsertSensorModel();
 
+		String oferta = Config.urlServidor + "/offering/"
+				+ identificador.getValue();
 		String sensor = Sensor.getSML(identificador.getValue(),
-				nome.getValue(), oferta.getValue(), localizacao.getValue(),
+				nome.getValue(), oferta, localizacao.getValue(),
 				saidaOntologia.getValue(), saidaDescricao.getValue(),
 				saidaUOM.getValue());
 
@@ -96,14 +93,6 @@ public class InsertSensor extends SelectorComposer<Component> {
 
 		Clients.showNotification("Enviado!\nResposta:\n" + responseString);
 		System.out.println("Resposta:\n" + responseString);
-	}
-
-	@Listen("onChange=#identifier")
-	public void atualizaOferta() {
-		if (identificador.getValue() == null) {
-			return;
-		}
-		oferta.setValue("hydronode.ufjf.br/oferta/" + identificador.getValue());
 	}
 
 }

@@ -3,6 +3,7 @@ package br.ufjf.hydronode.requisicoes;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
+import br.ufjf.hydronode.Config;
 import br.ufjf.hydronode.jsons.InsertObservationModel;
 import br.ufjf.hydronode.jsons.InsertSensorModel;
 import br.ufjf.hydronode.jsons.observationModel.FeatureOfInterest;
@@ -11,7 +12,6 @@ import br.ufjf.hydronode.jsons.observationModel.Identifier;
 import br.ufjf.hydronode.jsons.observationModel.Name;
 import br.ufjf.hydronode.jsons.observationModel.Observation;
 import br.ufjf.hydronode.jsons.observationModel.Result;
-import br.ufjf.hydronode.sensorml.Sensor;
 
 import com.google.gson.*;
 
@@ -27,14 +27,13 @@ import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Doublebox;
-import org.zkoss.zul.Intbox;
-import org.zkoss.zul.Label;
+
 import org.zkoss.zul.Textbox;
 
 public class InsertObservation extends SelectorComposer<Component> {
 	private static final long serialVersionUID = 1L;
 
-	String postURL = "http://localhost:8182/52n-sos-webapp/service";
+	String postURL = Config.urlSOS;
 	String codespaceVazio = "http://www.opengis.net/def/nil/OGC/0/unknown";
 	String observationType = "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement";
 
@@ -124,56 +123,43 @@ public class InsertObservation extends SelectorComposer<Component> {
 
 		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
 		String json = gson.toJson(iom);
-		System.out.println("JSON:");
-		System.out.println(json);
-		// HttpPost post = new HttpPost(postURL);
-		//
-		// InsertSensorModel modeloJson = new InsertSensorModel();
-		//
-		// String sensor = Sensor.getSML(identificador.getValue(),
-		// nome.getValue(), oferta.getValue(), localizacao.getValue(),
-		// saidaOntologia.getValue(), saidaDescricao.getValue(),
-		// saidaUOM.getValue());
-		//
-		// modeloJson.setProcedureDescription(sensor);
-		// System.out.println("XML do sensor:\n" + sensor);
-		// System.out.println("XML dentro do modelo:\n"
-		// + modeloJson.getProcedureDescription());
-		// String json = gson.toJson(modeloJson);
-		//
-		// System.out.println("Json gerado:\n" + json);
-		//
-		// StringEntity postingString;
-		// try {
-		// postingString = new StringEntity(json);
-		// } catch (UnsupportedEncodingException e) {
-		// Clients.showNotification("Erro ao montar requisicao json.");
-		// return;
-		// }
-		//
-		// post.setEntity(postingString);
-		// post.setHeader("content-type", "application/json");
-		//
-		// HttpClient httpClient = new DefaultHttpClient();
-		// HttpResponse response;
-		// try {
-		// response = httpClient.execute(post);
-		// } catch (IOException e) {
-		// Clients.showNotification("Erro ao enviar post com json.");
-		// return;
-		// }
-		//
-		// String responseString;
-		// try {
-		// responseString = new BasicResponseHandler()
-		// .handleResponse(response);
-		// } catch (IOException e) {
-		// Clients.showNotification("Erro ao recever resposta json.");
-		// return;
-		// }
-		//
-		// Clients.showNotification("Enviado!\nResposta:\n" + responseString);
-		// System.out.println("Resposta:\n" + responseString);
+
+		System.out.println("JSON:\n" + json);
+
+		HttpPost post = new HttpPost(postURL);
+
+		StringEntity postingString;
+		try {
+			postingString = new StringEntity(json);
+		} catch (UnsupportedEncodingException e) {
+			Clients.showNotification("Erro ao montar requisicao json.");
+			return;
+		}
+
+		post.setEntity(postingString);
+		post.setHeader("content-type", "application/json");
+
+		HttpClient httpClient = new DefaultHttpClient();
+		HttpResponse response;
+		try {
+			response = httpClient.execute(post);
+		} catch (IOException e) {
+			Clients.showNotification("Erro ao enviar post com json.");
+			return;
+		}
+
+		String responseString;
+		try {
+			responseString = new BasicResponseHandler()
+					.handleResponse(response);
+		} catch (IOException e) {
+			Clients.showNotification("Erro ao recever resposta json.");
+			System.out.println("Erro ao recever resposta json:\n" + e);
+			return;
+		}
+
+		Clients.showNotification("Enviado!\nResposta:\n" + responseString);
+		System.out.println("Resposta:\n" + responseString);
 	}
 
 	private InsertObservationModel montaInsertObservation() {

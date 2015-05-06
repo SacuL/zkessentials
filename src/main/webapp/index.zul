@@ -11,14 +11,20 @@
 				<label value="Testes" sclass="head1" />
 
 				<label value="Gráficos Live" sclass="head2" />
-				<hlayout>
-					<a href="/live/flashcharts.zul">Demo</a>
-				</hlayout>
-				
-				<label value="Requisições JSON usando GSON" sclass="head2" />
-				<hlayout>
-					<a href="/hydroserver/insertSensor.zul">Insert Sensor</a>
-				</hlayout>
+
+				<a href="/live/flashcharts.zul">Demo</a>
+
+
+				<label value="Requisições JSON usando GSON"
+					sclass="head2" />
+				<vlayout>
+					<a href="/hydroserver/insertSensor.zul">
+						Insert Sensor
+					</a>
+					<a href="/hydroserver/insertObservation.zul">
+						Insert Observation
+					</a>
+				</vlayout>
 
 
 
