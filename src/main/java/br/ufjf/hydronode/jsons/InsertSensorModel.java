@@ -15,8 +15,6 @@ public class InsertSensorModel {
 		this.service = "SOS";
 		this.version = "2.0.0";
 		this.procedureDescriptionFormat = "http://www.opengis.net/sensorML/1.0.1";
-
-		this.observableProperty = "Temperatura_da_Agua";
 		this.observationType = "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement";
 		this.featureOfInterestType = "http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint";
 

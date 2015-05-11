@@ -7,64 +7,66 @@
 		<center id="mainContent" autoscroll="true"
 			apply="br.ufjf.hydronode.requisicoes.InsertSensor">
 			<vlayout>
-				<grid width="500px">
+				<grid width="550px">
 					<columns>
 						<column align="right" hflex="min" />
 						<column />
 					</columns>
 					<rows>
 						<row>
-							<cell sclass="row-title">Long Name :</cell>
+							<cell sclass="row-title">Procedure :</cell>
 							<cell>
-								<textbox id="longName"
-									constraint="no empty: Campo obrigatório" />
+								<textbox id="procedureName"
+									constraint="no empty: Campo obrigatório" width="400px" />
 							</cell>
 						</row>
 						<row>
-							<cell sclass="row-title">Identifier :</cell>
+							<cell sclass="row-title">Long Name :</cell>
 							<cell>
-								<textbox id="identifier"
-									constraint="no empty: Campo obrigatório" width="200px" />
+								<textbox id="longName"
+									constraint="no empty: Campo obrigatório" width="400px" />
+							</cell>
+						</row>
+						<row>
+							<cell sclass="row-title">Offering :</cell>
+							<cell>
+								<textbox id="offeringName"
+									constraint="no empty: Campo obrigatório" width="400px" />
+							</cell>
+						</row>
+						<row>
+							<cell sclass="row-title">Observable Property :</cell>
+							<cell>
+								<textbox id="observableProperty"
+									constraint="no empty: Campo obrigatório" width="400px" />
 							</cell>
 						</row>
 						<row>
 							<cell sclass="row-title">
-								Localização :
+								Coordinates(x,y) :
 							</cell>
 							<cell>
-								<textbox id="localizacao"
-									constraint="no empty: Campo obrigatório" width="200px" />
+								<hlayout>
+									<doublebox id="localizacaoX"
+										constraint="no empty: Campo obrigatório" width="193px" />
+									<label sclass="row-title" value="," />
+									<doublebox id="localizacaoY"
+										constraint="no empty: Campo obrigatório" width="193px" />
+								</hlayout>
 							</cell>
 						</row>
 						<row>
-							<cell sclass="row-title">Saída :</cell>
+							<cell sclass="row-title">Altitude :</cell>
 							<cell>
-								<vlayout>
-									<hlayout>
-										<label sclass="row-title"
-											value="Ontologia:" />
-										<textbox id="saidaOntologia"
-											constraint="no empty: Campo obrigatório" width="200px" />
-									</hlayout>
-									<hlayout>
-										<label sclass="row-title"
-											value="Descrição" />
-										<textbox id="saidaDescricao"
-											constraint="no empty: Campo obrigatório" width="200px" />
-									</hlayout>
-									<hlayout>
-										<label sclass="row-title"
-											value="Unidade de Medida:" />
-										<textbox id="saidaUOM"
-											constraint="no empty: Campo obrigatório" width="200px" />
-									</hlayout>
-								</vlayout>
+								<doublebox id="localizacaoZ"
+									constraint="no empty: Campo obrigatório" width="400px" />
 							</cell>
 						</row>
 					</rows>
 				</grid>
+				<button id="enviar" label="Enviar" />
 				<hlayout>
-					<button id="enviar" label="Enviar" />
+
 				</hlayout>
 			</vlayout>
 		</center>

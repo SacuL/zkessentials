@@ -1,22 +1,16 @@
 package br.ufjf.hydronode.requisicoes;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import br.ufjf.hydronode.Config;
 import br.ufjf.hydronode.jsons.InsertSensorModel;
+import br.ufjf.hydronode.jsons.JsonUtils;
 import br.ufjf.hydronode.sensorml.Sensor;
 import com.google.gson.*;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.BasicResponseHandler;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.util.Clients;
+import org.zkoss.zul.Doublebox;
 import org.zkoss.zul.Textbox;
 
 public class InsertSensor extends SelectorComposer<Component> {
@@ -25,17 +19,19 @@ public class InsertSensor extends SelectorComposer<Component> {
 	String postURL = Config.urlSOS;
 
 	@Wire
-	Textbox nome;
+	Textbox procedureName;
 	@Wire
-	Textbox identificador;
+	Textbox longName;
 	@Wire
-	Textbox localizacao;
+	Textbox offeringName;
 	@Wire
-	Textbox saidaOntologia;
+	Doublebox localizacaoX;
 	@Wire
-	Textbox saidaDescricao;
+	Doublebox localizacaoY;
 	@Wire
-	Textbox saidaUOM;
+	Doublebox localizacaoZ;
+	@Wire
+	Textbox observableProperty;
 
 	@Listen("onClick=#enviar")
 	public void enviar() {
@@ -43,56 +39,28 @@ public class InsertSensor extends SelectorComposer<Component> {
 
 		// http://stackoverflow.com/questions/4147012/can-you-avoid-gson-converting-and-into-unicode-escape-sequences
 		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
-		HttpPost post = new HttpPost(postURL);
 
 		InsertSensorModel modeloJson = new InsertSensorModel();
-
-		String oferta = Config.urlServidor + "/offering/"
-				+ identificador.getValue();
-		String sensor = Sensor.getSML(identificador.getValue(),
-				nome.getValue(), oferta, localizacao.getValue(),
-				saidaOntologia.getValue(), saidaDescricao.getValue(),
-				saidaUOM.getValue());
-
+		String offering = Config.urlServidor + "/offering/"
+				+ offeringName.getValue();
+		String procedure = Config.urlServidor + "/procedure/"
+				+ procedureName.getValue();
+		String obsProperty = Config.urlServidor + "/observableProperty/"
+				+ observableProperty.getValue();
+		String sensor = Sensor.getSML(procedure, longName.getValue(),
+				offeringName.getValue(), offering, localizacaoX.getValue(),
+				localizacaoY.getValue(), localizacaoZ.getValue());
 		modeloJson.setProcedureDescription(sensor);
+		modeloJson.setObservableProperty(obsProperty);
 		System.out.println("XML do sensor:\n" + sensor);
-		System.out.println("XML dentro do modelo:\n"
-				+ modeloJson.getProcedureDescription());
+
 		String json = gson.toJson(modeloJson);
 
-		System.out.println("Json gerado:\n" + json);
+		System.out.println("JSON:\n" + json);
 
-		StringEntity postingString;
-		try {
-			postingString = new StringEntity(json);
-		} catch (UnsupportedEncodingException e) {
-			Clients.showNotification("Erro ao montar requisicao json.");
-			return;
-		}
-
-		post.setEntity(postingString);
-		post.setHeader("content-type", "application/json");
-
-		HttpClient httpClient = new DefaultHttpClient();
-		HttpResponse response;
-		try {
-			response = httpClient.execute(post);
-		} catch (IOException e) {
-			Clients.showNotification("Erro ao enviar post com json.");
-			return;
-		}
-
-		String responseString;
-		try {
-			responseString = new BasicResponseHandler()
-					.handleResponse(response);
-		} catch (IOException e) {
-			Clients.showNotification("Erro ao recever resposta json.");
-			return;
-		}
-
-		Clients.showNotification("Enviado!\nResposta:\n" + responseString);
-		System.out.println("Resposta:\n" + responseString);
+		String resposta = JsonUtils.enviaRequisicaoJSON(json);
+		Clients.showNotification(resposta);
+		System.out.println(resposta);
 	}
 
 }
