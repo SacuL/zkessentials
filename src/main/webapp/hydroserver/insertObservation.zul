@@ -7,7 +7,7 @@
 		<center id="mainContent" autoscroll="true"
 			apply="br.ufjf.hydronode.requisicoes.InsertObservation">
 			<vlayout>
-				<grid width="500px">
+				<grid width="580px">
 					<columns>
 						<column align="right" hflex="min" />
 						<column />
@@ -16,8 +16,13 @@
 						<row>
 							<cell sclass="row-title">Offering :</cell>
 							<cell>
-								<textbox id="oferta"
-									constraint="no empty: Campo obrigatório" />
+								<hlayout>
+									<textbox id="oferta"
+										constraint="no empty: Campo obrigatório" width="400px" />
+									<image style="cursor:pointer"
+										popup="popOferta" src="/imagens/interrogacao.png"
+										width="19px" />
+								</hlayout>
 							</cell>
 						</row>
 						<row>
@@ -26,14 +31,14 @@
 							</cell>
 							<cell>
 								<textbox id="observationIdentifier"
-									constraint="no empty: Campo obrigatório" width="200px" />
+									constraint="no empty: Campo obrigatório" width="400px" />
 							</cell>
 						</row>
 						<row>
 							<cell sclass="row-title">Procedure :</cell>
 							<cell>
 								<textbox id="procedure"
-									constraint="no empty: Campo obrigatório" width="200px" />
+									constraint="no empty: Campo obrigatório" width="400px" />
 							</cell>
 						</row>
 						<row>
@@ -42,7 +47,7 @@
 							</cell>
 							<cell>
 								<textbox id="observedProperty"
-									constraint="no empty: Campo obrigatório" width="200px" />
+									constraint="no empty: Campo obrigatório" width="400px" />
 							</cell>
 						</row>
 						<row>
@@ -51,7 +56,7 @@
 							</cell>
 							<cell>
 								<textbox id="featureOfInterest"
-									constraint="no empty: Campo obrigatório" width="200px" />
+									constraint="no empty: Campo obrigatório" width="400px" />
 							</cell>
 						</row>
 						<row>
@@ -61,10 +66,10 @@
 							<cell>
 								<hlayout>
 									<doublebox id="localizacaoX"
-										constraint="no empty: Campo obrigatório" width="90px" />
+										constraint="no empty: Campo obrigatório" width="193px" />
 									<label value="," />
 									<doublebox id="localizacaoY"
-										constraint="no empty: Campo obrigatório" width="90px" />
+										constraint="no empty: Campo obrigatório" width="193px" />
 								</hlayout>
 							</cell>
 						</row>
@@ -74,7 +79,7 @@
 							</cell>
 							<cell>
 								<textbox id="phenomenonTime"
-									constraint="no empty: Campo obrigatório" width="200px" />
+									constraint="no empty: Campo obrigatório" width="400px" />
 							</cell>
 						</row>
 						<row>
@@ -85,19 +90,28 @@
 										<label sclass="row-title"
 											value="Value: " />
 										<doublebox id="value"
-											constraint="no empty: Campo obrigatório" width="200px" />
+											constraint="no empty: Campo obrigatório" width="362px" />
 									</hlayout>
 									<hlayout>
 										<label sclass="row-title"
 											value="UOM: " />
 										<textbox id="uom"
-											constraint="no empty: Campo obrigatório" width="200px" />
+											constraint="no empty: Campo obrigatório" width="364px" />
 									</hlayout>
 								</vlayout>
 							</cell>
 						</row>
 					</rows>
 				</grid>
+				<popup id="popOferta" >
+					<html>
+
+						
+						<![CDATA[Teste de tooltip]]>
+						
+						
+					</html>
+				</popup>
 				<hlayout>
 					<button id="enviar" label="Enviar" />
 				</hlayout>
