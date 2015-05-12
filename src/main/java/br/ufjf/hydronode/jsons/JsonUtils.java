@@ -25,10 +25,6 @@ public class JsonUtils {
 		} catch (UnsupportedEncodingException e) {
 			return "Erro ao montar requisicao json.\n" + e;
 		}
-		System.out.println("Tamanho do posting string: "
-				+ postingString.getContentLength());
-
-		System.out.println("Eh repetivel? " + postingString.isRepeatable());
 
 		HttpPost post = new HttpPost(postURL);
 		post.setEntity(postingString);
@@ -53,7 +49,8 @@ public class JsonUtils {
 						.handleResponse(response);
 			} catch (IOException e) {
 				httpClient.getConnectionManager().shutdown();
-				return "IOException - Erro ao recever resposta json:\n" + e;
+				return "Erro IOException - Erro ao recever resposta json:\n"
+						+ e;
 			} catch (RuntimeException ex) {
 				// In case of an unexpected exception you may want to abort
 				// the HTTP request in order to shut down the underlying
@@ -63,14 +60,14 @@ public class JsonUtils {
 				if (responseString == null) {
 					responseString = "";
 				}
-				return "RuntimeException - Erro ao recever resposta json:\n" + ex + "Reposta: "
-						+ responseString;
+				return "Erro RuntimeException - Erro ao recever resposta json:\n"
+						+ ex + "Reposta: " + responseString;
 			}
 
 			httpClient.getConnectionManager().shutdown();
-			return "Enviado!\nResposta:\n" + responseString;
+			return responseString;
 		} else {
-			return "entity == null (JsonUtils)";
+			return "Erro entity == null (JsonUtils)";
 		}
 
 	}
