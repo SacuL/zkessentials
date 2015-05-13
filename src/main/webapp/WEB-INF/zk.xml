@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <zk>
+	<richlet>
+		<richlet-name>Offerings</richlet-name><!-- your preferred name -->
+		<richlet-class>br.ufjf.hydronode.paginas.offering.GeneralOffering
+		</richlet-class><!-- your class name, of course -->
+	</richlet>
+
+	<richlet-mapping>
+		<richlet-name>Offerings</richlet-name>
+		<url-pattern>/swe/offering/*</url-pattern>
+	</richlet-mapping>
 </zk>
