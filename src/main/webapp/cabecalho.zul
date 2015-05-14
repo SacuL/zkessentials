@@ -1,7 +1,8 @@
 <div hflex="1" vflex="1" sclass="banner">
 	<hbox hflex="1" vflex="1" align="center">
 
-		<image src="/imagens/UFJF-600-dpi-1024x740.jpg" style="border-radius: 15px; margin-left:10px; margin-right:10px"
+		<image src="/imagens/UFJF-600-dpi-1024x740.jpg"
+			style="border-radius: 15px; margin-left:10px; margin-right:10px"
 			width="90px" />
 
 		<div width="400px">

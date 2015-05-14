@@ -47,12 +47,10 @@ public class InsertObservation extends SelectorComposer<Component> {
 
 	@Listen("onClick=#enviar")
 	public void enviar() {
-		// montar o json e enviar
-
-		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
 
 		InsertObservationModel iom = montaInsertObservation();
 
+		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
 		String json = gson.toJson(iom);
 
 		System.out.println("JSON:\n" + json);

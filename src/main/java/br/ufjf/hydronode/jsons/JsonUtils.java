@@ -2,6 +2,7 @@ package br.ufjf.hydronode.jsons;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -11,7 +12,12 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import com.google.gson.Gson;
+
 import br.ufjf.hydronode.Config;
+import br.ufjf.hydronode.paginas.offering.Content;
+import br.ufjf.hydronode.paginas.offering.Offering;
+import br.ufjf.hydronode.paginas.offering.OfferingModel;
 
 public class JsonUtils {
 
@@ -71,4 +77,6 @@ public class JsonUtils {
 		}
 
 	}
+
+
 }
