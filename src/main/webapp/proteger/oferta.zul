@@ -41,7 +41,8 @@
 			<vbox vflex="1" hflex="1" align="center" spacing="20px"
 				sclass="demo-main">
 
-				<label id="titulo" value="Sensor" sclass="head1" />
+				<label id="titulo" value="Detalhes do Sensor"
+					sclass="head1" />
 
 
 				<vlayout>
@@ -83,7 +84,7 @@
 										width="400px" />
 								</cell>
 							</row>
-							<row>
+							<row visible="false">
 								<cell sclass="row-title">
 									Observed Area :
 								</cell>
@@ -100,6 +101,21 @@
 
 						</rows>
 					</grid>
+
+					<label id="tituloMapa"
+						value="Geolocalização das Leituras" sclass="head2" />
+
+					<label id="texto"
+						value="Esse sensor ainda não registrou leituras." />
+
+
+					<gmaps id="mapa" width="500px" height="300px"
+						showSmallCtrl="true">
+
+						<ginfo id="mapaInfo" open="false" />
+						<gpolygon id="mapaPoligono" />
+
+					</gmaps>
 
 
 				</vlayout>

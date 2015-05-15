@@ -2,7 +2,6 @@ package br.ufjf.hydronode.jsons;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -11,16 +10,15 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
-
-import com.google.gson.Gson;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import br.ufjf.hydronode.Config;
-import br.ufjf.hydronode.paginas.offering.Content;
-import br.ufjf.hydronode.paginas.offering.Offering;
-import br.ufjf.hydronode.paginas.offering.OfferingModel;
+import br.ufjf.hydronode.sos.SOSModel;
 
-public class JsonUtils {
+public class HttpUtils {
 
+	private static Logger log = LoggerFactory.getLogger(HttpUtils.class);
 	private final static String postURL = Config.urlSOS;
 
 	public static String enviaRequisicaoJSON(String json) {
@@ -29,7 +27,8 @@ public class JsonUtils {
 		try {
 			postingString = new StringEntity(json);
 		} catch (UnsupportedEncodingException e) {
-			return "Erro ao montar requisicao json.\n" + e;
+			log.error("Erro ao montar requisicao json:\n{}", e);
+			return null;
 		}
 
 		HttpPost post = new HttpPost(postURL);
@@ -42,7 +41,8 @@ public class JsonUtils {
 			response = httpClient.execute(post);
 		} catch (IOException e) {
 			httpClient.getConnectionManager().shutdown();
-			return "Erro ao enviar post com json.\n" + e;
+			log.error("Erro ao enviar post com json:\n{}", e);
+			return null;
 		}
 
 		HttpEntity entity = response.getEntity();
@@ -55,8 +55,8 @@ public class JsonUtils {
 						.handleResponse(response);
 			} catch (IOException e) {
 				httpClient.getConnectionManager().shutdown();
-				return "Erro IOException - Erro ao recever resposta json:\n"
-						+ e;
+				log.error("IOException - Erro ao recever resposta json:\n{}", e);
+				return null;
 			} catch (RuntimeException ex) {
 				// In case of an unexpected exception you may want to abort
 				// the HTTP request in order to shut down the underlying
@@ -66,17 +66,19 @@ public class JsonUtils {
 				if (responseString == null) {
 					responseString = "";
 				}
-				return "Erro RuntimeException - Erro ao recever resposta json:\n"
-						+ ex + "Reposta: " + responseString;
+				log.error(
+						"RuntimeException - Erro ao recever resposta json:\n{}\nResposta:\n{}",
+						ex, responseString);
+				return null;
 			}
 
 			httpClient.getConnectionManager().shutdown();
 			return responseString;
 		} else {
-			return "Erro entity == null (JsonUtils)";
+			log.error("Erro entity == null (HttpUtils)");
+			return null;
 		}
 
 	}
-
 
 }

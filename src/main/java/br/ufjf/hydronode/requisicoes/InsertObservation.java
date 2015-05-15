@@ -2,16 +2,16 @@ package br.ufjf.hydronode.requisicoes;
 
 import br.ufjf.hydronode.Config;
 import br.ufjf.hydronode.jsons.InsertObservationModel;
-import br.ufjf.hydronode.jsons.JsonUtils;
+import br.ufjf.hydronode.jsons.HttpUtils;
 import br.ufjf.hydronode.jsons.observationModel.FeatureOfInterest;
 import br.ufjf.hydronode.jsons.observationModel.Geometry;
 import br.ufjf.hydronode.jsons.observationModel.Identifier;
 import br.ufjf.hydronode.jsons.observationModel.Name;
 import br.ufjf.hydronode.jsons.observationModel.Observation;
 import br.ufjf.hydronode.jsons.observationModel.Result;
-
 import com.google.gson.*;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Listen;
@@ -22,6 +22,8 @@ import org.zkoss.zul.Textbox;
 
 public class InsertObservation extends SelectorComposer<Component> {
 	private static final long serialVersionUID = 1L;
+
+	static Logger log = LoggerFactory.getLogger(InsertObservation.class);
 
 	String codespaceVazio = "http://www.opengis.net/def/nil/OGC/0/unknown";
 	String observationType = "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement";
@@ -53,11 +55,14 @@ public class InsertObservation extends SelectorComposer<Component> {
 		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
 		String json = gson.toJson(iom);
 
-		System.out.println("JSON:\n" + json);
+		log.info("JSON:\n{}", json);
 
-		String resposta = JsonUtils.enviaRequisicaoJSON(json);
+		String resposta = HttpUtils.enviaRequisicaoJSON(json);
+		if (resposta == null) {
+			Clients.showNotification("Um erro ocorreu");
+			return;
+		}
 		Clients.showNotification(resposta);
-		System.out.println(resposta);
 
 	}
 

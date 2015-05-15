@@ -2,7 +2,7 @@ package br.ufjf.hydronode.requisicoes;
 
 import br.ufjf.hydronode.Config;
 import br.ufjf.hydronode.jsons.InsertSensorModel;
-import br.ufjf.hydronode.jsons.JsonUtils;
+import br.ufjf.hydronode.jsons.HttpUtils;
 import br.ufjf.hydronode.sensorml.Sensor;
 import com.google.gson.*;
 import org.zkoss.zk.ui.Component;
@@ -58,7 +58,7 @@ public class InsertSensor extends SelectorComposer<Component> {
 
 		System.out.println("JSON:\n" + json);
 
-		String resposta = JsonUtils.enviaRequisicaoJSON(json);
+		String resposta = HttpUtils.enviaRequisicaoJSON(json);
 		Clients.showNotification(resposta);
 		System.out.println(resposta);
 	}

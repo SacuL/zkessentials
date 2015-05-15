@@ -3,7 +3,7 @@ package br.ufjf.hydronode.sos;
 import java.util.ArrayList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import br.ufjf.hydronode.jsons.JsonUtils;
+import br.ufjf.hydronode.jsons.HttpUtils;
 import br.ufjf.hydronode.paginas.offering.Content;
 import br.ufjf.hydronode.paginas.offering.OfferingModel;
 import com.google.gson.Gson;
@@ -14,10 +14,10 @@ public class SOSModel {
 
 	private static String getCapabilities() {
 
-		String r = JsonUtils
+		String r = HttpUtils
 				.enviaRequisicaoJSON("{\"request\": \"GetCapabilities\", \"service\": \"SOS\", \"sections\": [ \"Contents\" ]}");
 
-		log.warn("Resposta getCapabilities: {}", r);
+		// log.warn("Resposta getCapabilities: {}", r);
 		return r;
 
 	}
@@ -26,7 +26,7 @@ public class SOSModel {
 		String json = "{\"request\": \"GetObservation\", \"service\": \"SOS\", \"version\": \"2.0.0\", \"offering\": \""
 				+ offering + "\" }";
 
-		return JsonUtils.enviaRequisicaoJSON(json);
+		return HttpUtils.enviaRequisicaoJSON(json);
 	}
 
 	public static ArrayList<Content> getOfferings() {
@@ -49,17 +49,18 @@ public class SOSModel {
 
 		for (Content c : ofertas) {
 			if (c.getIdentifier().equals(offering)) {
-				log.warn(
-						"Oferta encontrada! \nID: {} \nName: {} \nProcedure: {} \nObsProp {} \nObsArea",
-						c.getIdentifier(), c.getName(), c.getProcedure(), c
-								.getObservableProperty().size(), c
-								.getObservedArea().size());
+				log.debug("Oferta encontrada!");
 				return c;
 			}
 		}
-		log.error("Nenhuma oferta encontrada!");
+		log.warn("Nenhuma oferta encontrada!");
 
 		return null;
+	}
+
+	public static String describeSensor(String procedure) {
+		String json = "{\"request\": \"DescribeSensor\",\"service\": \"SOS\",\"version\": \"2.0.0\",  \"procedure\": \"+procedure+\",\"procedureDescriptionFormat\": \"http://www.opengis.net/sensorML/1.0.1\"}";
+		return HttpUtils.enviaRequisicaoJSON(json);
 	}
 
 }
