@@ -54,7 +54,7 @@
 						<rows>
 							<row>
 								<cell sclass="row-title">
-									Identifier :
+									Identificador :
 								</cell>
 								<cell>
 									<label id="identifier"
@@ -69,7 +69,7 @@
 							</row>
 							<row>
 								<cell sclass="row-title">
-									Procedure :
+									Procedimento :
 								</cell>
 								<cell>
 									<label id="procedure" width="400px" />
@@ -77,7 +77,7 @@
 							</row>
 							<row>
 								<cell sclass="row-title">
-									Observable Property :
+									Propriedade Observada :
 								</cell>
 								<cell>
 									<label id="observableProperty"
@@ -110,7 +110,7 @@
 
 
 					<gmaps id="mapa" width="500px" height="300px"
-						showSmallCtrl="true">
+						showSmallCtrl="true" visible="false">
 
 						<ginfo id="mapaInfo" open="false" />
 						<gpolygon id="mapaPoligono" />

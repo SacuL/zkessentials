@@ -12,9 +12,7 @@ import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import br.ufjf.hydronode.Config;
-import br.ufjf.hydronode.sos.SOSModel;
 
 public class HttpUtils {
 

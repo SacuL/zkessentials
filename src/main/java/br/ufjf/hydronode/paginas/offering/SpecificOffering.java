@@ -15,6 +15,7 @@ import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Label;
 
+import br.ufjf.hydronode.jsons.ZkUtils;
 import br.ufjf.hydronode.sos.SOSModel;
 
 public class SpecificOffering extends SelectorComposer<Component> {
@@ -26,10 +27,7 @@ public class SpecificOffering extends SelectorComposer<Component> {
 			localizacaoX, localizacaoY, texto;
 	@Wire
 	private Gmaps mapa;
-	// @Wire
-	// private Ginfo mapaInfo;
-	// @Wire
-	// private Gmarker mapaMarker;
+
 	@Wire
 	private Gpolygon mapaPoligono;
 
@@ -118,26 +116,24 @@ public class SpecificOffering extends SelectorComposer<Component> {
 		log.warn("Ponto UL = {} , {}", latLL, lonUR);
 		log.warn("Ponto LR = {} , {}", latUR, lonLL);
 
-		// Calculo do centro do retangulo
-		Double centroX, centroY;
-		if (latUR > latLL) {
-			centroX = ((latUR - latLL) / 2) + latLL;
-		} else {
-			centroX = ((latLL - latUR) / 2) + latUR;
-		}
-		if (lonUR > lonLL) {
-			centroY = ((lonUR - lonLL) / 2) + lonLL;
-		} else {
-			centroY = ((lonLL - lonUR) / 2) + lonUR;
-		}
-
-		mapa.panTo(centroX, centroY);
+		// // Calculo do centro do retangulo
+		// Double centroX, centroY;
+		// if (latUR > latLL) {
+		// centroX = ((latUR - latLL) / 2) + latLL;
+		// } else {
+		// centroX = ((latLL - latUR) / 2) + latUR;
+		// }
+		// if (lonUR > lonLL) {
+		// centroY = ((lonUR - lonLL) / 2) + lonLL;
+		// } else {
+		// centroY = ((lonLL - lonUR) / 2) + lonUR;
+		// }
+		//
+		// mapa.panTo(centroX, centroY);
 		// mapa.setZoom(5);
 
-	}
-
-	@Listen("onCreate= #mainContent")
-	public void testes() {
+		ZkUtils.scaleMap(mapa, 300, latLL, latUR, lonLL, lonUR);
 
 	}
+
 }
