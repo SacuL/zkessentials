@@ -4,7 +4,11 @@ import br.ufjf.hydronode.Config;
 import br.ufjf.hydronode.jsons.InsertSensorModel;
 import br.ufjf.hydronode.jsons.HttpUtils;
 import br.ufjf.hydronode.sensorml.Sensor;
+
 import com.google.gson.*;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Listen;
@@ -15,6 +19,8 @@ import org.zkoss.zul.Textbox;
 
 public class InsertSensor extends SelectorComposer<Component> {
 	private static final long serialVersionUID = 1L;
+
+	static Logger log = LoggerFactory.getLogger(InsertSensor.class);
 
 	String postURL = Config.urlSOS;
 
@@ -41,26 +47,32 @@ public class InsertSensor extends SelectorComposer<Component> {
 		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
 
 		InsertSensorModel modeloJson = new InsertSensorModel();
-		String offering = Config.urlServidor + "/offering/"
+		String offering = Config.urlServidor + Config.offering
 				+ offeringName.getValue();
-		String procedure = Config.urlServidor + "/procedure/"
+		String procedure = Config.urlServidor + Config.procedure
 				+ procedureName.getValue();
-		String obsProperty = Config.urlServidor + "/observableProperty/"
+		String obsProperty = Config.urlServidor + Config.observableProperty
 				+ observableProperty.getValue();
 		String sensor = Sensor.getSML(procedure, longName.getValue(),
 				offeringName.getValue(), offering, localizacaoX.getValue(),
 				localizacaoY.getValue(), localizacaoZ.getValue());
 		modeloJson.setProcedureDescription(sensor);
 		modeloJson.setObservableProperty(obsProperty);
-		System.out.println("XML do sensor:\n" + sensor);
+
+		log.warn("XML do sensor:\n{}", sensor);
 
 		String json = gson.toJson(modeloJson);
 
-		System.out.println("JSON:\n" + json);
+		log.warn("JSON:\n{}", json);
 
 		String resposta = HttpUtils.enviaRequisicaoJSON(json);
-		Clients.showNotification(resposta);
-		System.out.println(resposta);
+		if (resposta == null) {
+			Clients.showNotification("Um erro ocorreu.");
+			return;
+		}
+		Clients.showNotification("Sensor registrado com sucesso!");
+
+		log.warn("Resposta:\n{}", resposta);
 	}
 
 }

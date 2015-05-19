@@ -41,7 +41,7 @@
 			<vbox vflex="1" hflex="1" align="center" spacing="20px"
 				sclass="demo-main">
 
-				<label id="titulo" value="Detalhes do Procedimento"
+				<label id="titulo" value="Detalhes da Estação"
 					sclass="head1" />
 
 
@@ -54,7 +54,7 @@
 						<rows>
 							<row>
 								<cell sclass="row-title">
-									Procedimento :
+									Identificador :
 								</cell>
 								<cell>
 									<label id="procedure" width="400px" />
@@ -98,7 +98,7 @@
 						value="Geolocalização das Leituras" sclass="head2" />
 
 					<label id="texto"
-						value="Esse sensor ainda não registrou leituras." />
+						value="Os sensores dessa estação ainda não registraram leituras." />
 
 
 					<gmaps id="mapa" width="500px" height="300px"

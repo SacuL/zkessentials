@@ -71,26 +71,28 @@ public class InsertObservation extends SelectorComposer<Component> {
 				localizacaoX.getValue(), localizacaoY.getValue() });
 		Name featureName = new Name(featureOfInterest.getValue(),
 				codespaceVazio);
-		Identifier featureIdentifier = new Identifier(
-				featureOfInterest.getValue(), codespaceVazio);
+		Identifier featureIdentifier = new Identifier(Config.urlServidor
+				+ Config.featureOfInterest + featureOfInterest.getValue(),
+				codespaceVazio);
 		Identifier obsIdentifier = new Identifier(Config.urlServidor
-				+ "/observation/" + observationIdentifier.getValue(),
+				+ Config.observation + observationIdentifier.getValue(),
 				codespaceVazio);
 		Result resultado = new Result(uom.getValue(), value.getValue());
 
 		FeatureOfInterest foi = new FeatureOfInterest(featureIdentifier,
 				featureName, featureGeo);
 
-		String obsProperty = Config.urlServidor + "/observableProperty/"
+		String obsProperty = Config.urlServidor + Config.observableProperty
 				+ observedProperty.getValue();
 
 		Observation obs = new Observation(obsIdentifier, observationType,
-				Config.urlServidor + "/procedure/" + procedure.getValue(),
+				Config.urlServidor + Config.procedure + procedure.getValue(),
 				obsProperty, foi, phenomenonTime.getValue(),
 				phenomenonTime.getValue(), resultado);
 
 		InsertObservationModel iom = new InsertObservationModel();
-		iom.setOffering(Config.urlServidor + "/offering/" + oferta.getValue());
+		iom.setOffering(Config.urlServidor + Config.offering
+				+ oferta.getValue());
 		iom.setObservation(obs);
 		return iom;
 	}

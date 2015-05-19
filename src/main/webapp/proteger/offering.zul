@@ -69,7 +69,7 @@
 							</row>
 							<row>
 								<cell sclass="row-title">
-									Procedimento :
+									Estação :
 								</cell>
 								<cell>
 									<label id="procedure" width="400px" />

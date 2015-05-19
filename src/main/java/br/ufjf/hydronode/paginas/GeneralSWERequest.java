@@ -29,14 +29,15 @@ public class GeneralSWERequest extends GenericRichlet {
 		if (!requestPath.substring(1).contains("/")) {
 			// caminho invalido, redirecionar para outra pagina
 		}
-		String operacao = requestPath.substring(1, requestPath.substring(1)
-				.indexOf("/") + 1);
+		String operacao = requestPath.substring(0, requestPath.substring(1)
+				.indexOf("/") + 2);
+
 		// mudar para uma pagina padrao (ou dar um foward?)
 		String pagina = "";
 
-		if (operacao.equalsIgnoreCase("offering")) {
+		if (operacao.equalsIgnoreCase(Config.offering)) {
 			pagina = "/proteger/offering.zul";
-		} else if (operacao.equalsIgnoreCase("procedure")) {
+		} else if (operacao.equalsIgnoreCase(Config.procedure)) {
 			pagina = "/proteger/procedure.zul";
 		} else if (operacao.equalsIgnoreCase("observedProperty")) {
 			pagina = "/proteger/observedproperty.zul";
