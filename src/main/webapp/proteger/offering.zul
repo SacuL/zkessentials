@@ -1,10 +1,17 @@
 <zk>
 	<style>
-		.banner { background-color:#102d35; color: white; padding: 5px
-		10px; } .banner-head{ font-size: 2.4em; } .banner .logout{
-		text-decoration: underline; cursor: pointer; }
+		.meuGrid { min-width: 350px }
 
-		.footer { background-color:#102d35; color: white; padding-top:
+		.banner { background-color: #102d35; color: white; padding: 5px;
+		}
+
+		.banner-head { font-size: 2.4em; }
+
+		.banner-head-menor { font-size: 1.6em; }
+
+		.banner .logout { text-decoration: underline; cursor: pointer; }
+
+		.footer { background-color: #102d35; color: white; padding-top:
 		5px; }
 
 		.footer a,.footer a:VISITED { color: white; }
@@ -12,28 +19,31 @@
 		.sidebar a,.sidebar a:VISITED { color: black; text-decoration:
 		none; }
 
-		.sidebar-fn{ cursor: pointer; }
+		.sidebar-fn { cursor: pointer; }
 
+		.head1 { font-size: large; }
 
-		.head1{ font-size: large; } .head2{ font-size: medium; }
+		.head2 { font-size: medium; }
 
-		.row-title .z-label{ font-weight: bold; color:#636363; }
+		.row-title .z-label { font-weight: bold; color: #636363; }
 
-		.fn-caption .z-caption-l{ font-weight: bold; font-size: medium;
+		.fn-caption .z-caption-l { font-weight: bold; font-size: medium;
 		color: #636363; }
 
-		.complete-todo .z-label{ text-decoration: line-through; }
+		.complete-todo .z-label { text-decoration: line-through; }
 
-		.warn{ color:red; }
+		.warn { color: red; }
 
-		.demo-main a,.demo-main a:VISITED{ color:#636363;
+		.demo-main a,.demo-main a:VISITED { color: #636363;
 		text-decoration: underline; font-size: smaller; }
 
-		.todo-box { padding-right:4px; }
-
+		.todo-box { padding-right: 4px; }
 	</style>
+
+
+
 	<borderlayout hflex="1" vflex="1">
-		<north height="100px" border="none">
+		<north height="50px" border="none">
 			<include src="/cabecalho.zul" />
 		</north>
 		<center id="mainContent" autoscroll="true"
@@ -46,23 +56,14 @@
 
 
 				<vlayout>
-					<grid width="550px" align="center">
+					<grid hflex="min" align="center" sclass="meuGrid">
 						<columns>
-							<column align="right" hflex="min" />
+							<column align="right" />
 							<column />
 						</columns>
 						<rows>
 							<row>
-								<cell sclass="row-title">
-									Identificador :
-								</cell>
-								<cell>
-									<label id="identifier"
-										width="400px" />
-								</cell>
-							</row>
-							<row>
-								<cell sclass="row-title">Name :</cell>
+								<cell sclass="row-title">Nome :</cell>
 								<cell>
 									<label id="name" width="400px" />
 								</cell>
@@ -72,7 +73,7 @@
 									Estação :
 								</cell>
 								<cell>
-									<label id="procedure" width="400px" />
+									<button id="procedure" />
 								</cell>
 							</row>
 							<row>
@@ -80,8 +81,7 @@
 									Propriedade Observada :
 								</cell>
 								<cell>
-									<label id="observableProperty"
-										width="400px" />
+									<button id="observableProperty" />
 								</cell>
 							</row>
 							<row visible="false">
@@ -109,13 +109,29 @@
 						value="Esse sensor ainda não registrou leituras." />
 
 
-					<gmaps id="mapa" width="500px" height="300px"
+					<gmaps id="mapa" width="815px" height="490px"
 						showSmallCtrl="true" visible="false">
 
+						<gmarker id="mapaMarker" visible="false" />
 						<ginfo id="mapaInfo" open="false" />
-						<gpolygon id="mapaPoligono" />
+						<gpolygon id="mapaPoligono" visible="false" />
 
 					</gmaps>
+
+					<button id="botaoLeituras" label="Exibir Leituras"
+						style="font-size: medium; padding-top: 8px; padding-bottom: 7px; padding-left: 9px; padding-right: 9px;" />
+
+					<grid width="815px" id="gridLeituras"
+						visible="false" align="center">
+						<columns>
+							<column label="Identificador" width="200px" />
+							<column label="Localização" width="200px" />
+							<column label="Data/Hora" width="200px" />
+							<column label="Valor" width="150px" />
+							<column label="Detalhes" width="60px"
+								align="center" />
+						</columns>
+					</grid>
 
 
 				</vlayout>
@@ -124,8 +140,9 @@
 
 			</vbox>
 		</center>
-		<south height="50px" border="none">
-			<include src="/rodape.zul" />
-		</south>
+
+		<!-- 		<south height="50px" border="none"> -->
+		<!-- 			<include src="/rodape.zul" /> -->
+		<!-- 		</south> -->
 	</borderlayout>
 </zk>

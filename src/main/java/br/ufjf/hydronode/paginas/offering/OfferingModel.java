@@ -9,7 +9,7 @@ public class OfferingModel {
 		return contents;
 	}
 
-	public void setContents(ArrayList<Content> contents) {
+	public void setObservations(ArrayList<Content> contents) {
 		this.contents = contents;
 	}
 

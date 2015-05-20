@@ -1,7 +1,7 @@
 <?link rel="stylesheet" type="text/css" href="/style.css"?>
 <zk>
 	<borderlayout hflex="1" vflex="1">
-		<north height="100px" border="none">
+		<north height="50px" border="none">
 			<include src="/cabecalho.zul" />
 		</north>
 		<center id="mainContent" autoscroll="true"
@@ -20,8 +20,8 @@
 
 			</vbox>
 		</center>
-		<south height="50px" border="none">
-			<include src="/rodape.zul" />
-		</south>
+		<!-- 		<south height="50px" border="none"> -->
+		<!-- 			<include src="/rodape.zul" /> -->
+		<!-- 		</south> -->
 	</borderlayout>
 </zk>

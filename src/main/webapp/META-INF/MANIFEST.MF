@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
-Specification-Title: ZK Application
+Specification-Title: WebApp HydroNode
 Specification-Version: 1.0
-Specification-Vendor: 
-Implementation-Title: 
-Implementation-URL: http://your-website/
+Specification-Vendor: Lucas Saar Cerqueira
+Implementation-Title: br.ufjf.hydronode
+Implementation-URL: http://a-definir/
 Implementation-Version: 1.0
-Implementation-Vendor: 
+Implementation-Vendor: Lucas Saar Cerqueira

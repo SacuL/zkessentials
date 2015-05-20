@@ -11,7 +11,6 @@ import org.zkoss.zul.Row;
 import org.zkoss.zul.RowRenderer;
 import org.zkoss.zul.SimpleListModel;
 
-import br.ufjf.hydronode.Config;
 import br.ufjf.hydronode.sos.SOSModel;
 
 public class Offering extends SelectorComposer<Component> {
@@ -34,12 +33,8 @@ public class Offering extends SelectorComposer<Component> {
 		public void render(Row row, Object data, int index) throws Exception {
 			Content content = (Content) data;
 			new Label(content.getName()).setParent(row);
-			new Label(content.getProcedure().get(0)
-					.replace(Config.urlServidor + "/procedure/", ""))
-					.setParent(row);
-			new Label(content.getObservableProperty().get(0)
-					.replace(Config.urlServidor + "/observableProperty/", ""))
-					.setParent(row);
+			new Label(content.getProcedure().get(0)).setParent(row);
+			new Label(content.getObservableProperty().get(0)).setParent(row);
 
 		}
 

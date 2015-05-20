@@ -1,7 +1,7 @@
 <?link rel="stylesheet" type="text/css" href="/style.css"?>
 <zk>
 	<borderlayout hflex="1" vflex="1">
-		<north height="100px" border="none">
+		<north height="50px" border="none">
 			<include src="/cabecalho.zul" />
 		</north>
 		<center id="mainContent" autoscroll="true">
@@ -10,26 +10,27 @@
 
 				<label value="Index da SWE" sclass="head1" />
 
-<!-- 				<label value="Gráficos Live" sclass="head2" /> -->
+				<!-- 				<label value="Gráficos Live" sclass="head2" /> -->
 
-<!-- 				<a href="/live/flashcharts.zul">Demo</a> -->
+				<!-- 				<a href="/live/flashcharts.zul">Demo</a> -->
 
 
-<!-- 				<label value="Requisições JSON usando GSON" -->
-<!-- 					sclass="head2" /> -->
-<!-- 				<vlayout> -->
-<!-- 					<a href="/hydroserver/insertSensor.zul"> -->
-<!-- 						Insert Sensor -->
-<!-- 					</a> -->
-<!-- 					<a href="/hydroserver/insertObservation.zul"> -->
-<!-- 						Insert Observation -->
-<!-- 					</a> -->
-<!-- 				</vlayout> -->
+				<!-- 				<label value="Requisições JSON usando GSON" -->
+				<!-- 					sclass="head2" /> -->
+				<!-- 				<vlayout> -->
+				<!-- 					<a href="/hydroserver/insertSensor.zul"> -->
+				<!-- 						Insert Sensor -->
+				<!-- 					</a> -->
+				<!-- 					<a href="/hydroserver/insertObservation.zul"> -->
+				<!-- 						Insert Observation -->
+				<!-- 					</a> -->
+				<!-- 				</vlayout> -->
 
 			</vbox>
 		</center>
-		<south height="50px" border="none">
-			<include src="/rodape.zul" />
-		</south>
+
+		<!-- 		<south height="50px" border="none"> -->
+		<!-- 			<include src="/rodape.zul" /> -->
+		<!-- 		</south> -->
 	</borderlayout>
 </zk>
