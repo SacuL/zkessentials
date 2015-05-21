@@ -1,6 +1,8 @@
 <zk>
 	<style>
-		.meuGrid { min-width: 350px }
+		.borda-azul { border: 2px solid #102d35;}
+
+		.meu-grid { min-width: 350px }
 
 		.banner { background-color: #102d35; color: white; padding: 5px;
 		}
@@ -39,9 +41,6 @@
 
 		.todo-box { padding-right: 4px; }
 	</style>
-
-
-
 	<borderlayout hflex="1" vflex="1">
 		<north height="50px" border="none">
 			<include src="/cabecalho.zul" />
@@ -54,9 +53,9 @@
 				<label id="titulo" value="Detalhes do Sensor"
 					sclass="head1" />
 
-
 				<vlayout>
-					<grid hflex="min" align="center" sclass="meuGrid">
+					<grid hflex="min" align="center"
+						sclass="meu-grid">
 						<columns>
 							<column align="right" />
 							<column />
@@ -108,15 +107,16 @@
 					<label id="texto"
 						value="Esse sensor ainda não registrou leituras." />
 
+					<div sclass="borda-azul">
+						<gmaps id="mapa" width="815px" height="490px"
+							showSmallCtrl="true" visible="false">
 
-					<gmaps id="mapa" width="815px" height="490px"
-						showSmallCtrl="true" visible="false">
+<!-- 							<gmarker id="mapaMarker" open="true" /> -->
+<!-- 							<ginfo id="mapaInfo" open="false" /> -->
+							<gpolygon id="mapaPoligono" visible="false" />
 
-						<gmarker id="mapaMarker" visible="false" />
-						<ginfo id="mapaInfo" open="false" />
-						<gpolygon id="mapaPoligono" visible="false" />
-
-					</gmaps>
+						</gmaps>
+					</div>
 
 					<button id="botaoLeituras" label="Exibir Leituras"
 						style="font-size: medium; padding-top: 8px; padding-bottom: 7px; padding-left: 9px; padding-right: 9px;" />

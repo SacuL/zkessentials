@@ -26,12 +26,9 @@ import org.zkoss.zul.ListModel;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Row;
 import org.zkoss.zul.RowRenderer;
-import org.zkoss.zul.SimpleListModel;
-
 import br.ufjf.hydronode.Config;
 import br.ufjf.hydronode.jsons.ZkUtils;
 import br.ufjf.hydronode.jsons.observationModel.Observation;
-import br.ufjf.hydronode.paginas.offering.Offering.MyRowRenderer;
 import br.ufjf.hydronode.sos.SOSModel;
 
 public class SpecificOffering extends SelectorComposer<Component> {
@@ -110,6 +107,10 @@ public class SpecificOffering extends SelectorComposer<Component> {
 			texto.setVisible(false);
 			botaoLeituras.setVisible(true);
 		}
+
+		// ///////
+		// Mapa //
+		// ///////
 		Map<String, Object> loc = oferta.getObservedArea();
 
 		Object coordLLeft = loc.get("lowerLeft");
@@ -173,10 +174,11 @@ public class SpecificOffering extends SelectorComposer<Component> {
 		}
 
 		ZkUtils.scaleMap(mapa, 300, latLL, latUR, lonLL, lonUR);
+		montaGrid();
 
 	}
 
-	@Listen("onClick = button#botaoLeituras")
+	// @Listen("onClick = button#botaoLeituras")
 	public void montaGrid() {
 		if (oferta == null || oferta.getIdentifier() == null
 				|| oferta.getIdentifier().isEmpty()) {
@@ -189,6 +191,9 @@ public class SpecificOffering extends SelectorComposer<Component> {
 
 		log.info("O sensor {} possui {} leituras.", oferta.getName(),
 				leituras.size());
+
+		mapaMarker.setContent("Esse sensor possui " + leituras.size()
+				+ " leituras registradas");
 
 		ListModel<Object> listModel = new ListModelList<Object>(leituras);
 		gridLeituras.setModel(listModel);

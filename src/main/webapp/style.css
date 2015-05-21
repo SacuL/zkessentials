@@ -1,4 +1,11 @@
-.meuGrid {
+/* Arquivos com css hardcoded: */
+/*  - /proteger/offering.zul */
+/*  - /proteger/procedure.zul */
+.borda-azul {
+	border: 2px solid #102d35;
+}
+
+.meu-grid {
 	min-width: 350px
 }
 

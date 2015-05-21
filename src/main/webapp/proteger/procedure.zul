@@ -1,6 +1,8 @@
 <zk>
 	<style>
-		.meuGrid { min-width: 350px }
+		.borda-azul { border: 2px solid #102d35; }
+
+		.meu-grid { min-width: 350px }
 
 		.banner { background-color: #102d35; color: white; padding: 5px;
 		}
@@ -38,7 +40,6 @@
 		text-decoration: underline; font-size: smaller; }
 
 		.todo-box { padding-right: 4px; }
-
 	</style>
 	<borderlayout hflex="1" vflex="1">
 		<north height="50px" border="none">
@@ -108,14 +109,15 @@
 					<label id="texto"
 						value="Os sensores dessa estação ainda não registraram leituras." />
 
+					<div sclass="borda-azul">
+						<gmaps id="mapa" width="500px" height="300px"
+							showSmallCtrl="true" visible="false">
 
-					<gmaps id="mapa" width="500px" height="300px"
-						showSmallCtrl="true" visible="false">
+							<ginfo id="mapaInfo" open="false" />
+							<gpolygon id="mapaPoligono" />
 
-						<ginfo id="mapaInfo" open="false" />
-						<gpolygon id="mapaPoligono" />
-
-					</gmaps>
+						</gmaps>
+					</div>
 
 
 				</vlayout>
