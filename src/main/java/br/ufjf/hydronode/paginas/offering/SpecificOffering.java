@@ -44,14 +44,12 @@ public class SpecificOffering extends SelectorComposer<Component> {
 	@Wire
 	private Gmaps mapa;
 
-	@Wire
 	private Gpolygon mapaPoligono;
 
-	@Wire
 	private Gmarker mapaMarker;
 
-	@Wire
-	private Button botaoLeituras;
+	// @Wire
+	// private Button botaoLeituras;
 
 	@Wire
 	private Grid gridLeituras;
@@ -82,16 +80,17 @@ public class SpecificOffering extends SelectorComposer<Component> {
 
 		if (oferta == null) {
 			log.error("Erro ao buscar a oferta");
-			botaoLeituras.setVisible(false);
+			// botaoLeituras.setVisible(false);
 			texto.setVisible(false);
 			return;
 		}
 
 		name.setValue(oferta.getName());
-		procedure.setHref(oferta.getProcedure().get(0));
+		procedure.setHref("http://" + oferta.getProcedure().get(0));
 		procedure.setLabel(oferta.getProcedure().get(0)
 				.replace(Config.urlServidor + Config.procedure, ""));
-		observableProperty.setHref(oferta.getObservableProperty().get(0));
+		observableProperty.setHref("http://"
+				+ oferta.getObservableProperty().get(0));
 		observableProperty.setLabel(oferta.getObservableProperty().get(0)
 				.replace(Config.urlServidor + Config.observableProperty, ""));
 
@@ -99,13 +98,13 @@ public class SpecificOffering extends SelectorComposer<Component> {
 			// ainda nao ha leituras
 			mapa.setVisible(false);
 			texto.setVisible(true);
-			botaoLeituras.setVisible(false);
+			// botaoLeituras.setVisible(false);
 			return;
 		} else {
 			// so pra garantir
 			mapa.setVisible(true);
 			texto.setVisible(false);
-			botaoLeituras.setVisible(true);
+			// botaoLeituras.setVisible(true);
 		}
 
 		// ///////
@@ -132,14 +131,13 @@ public class SpecificOffering extends SelectorComposer<Component> {
 
 		if (latLL.equals(latUR) && (lonLL.equals(lonUR))) {
 			log.info("Eh um ponto e nao uma area");
+			mapaMarker = new Gmarker();
 			mapaMarker.setLat(latLL);
 			mapaMarker.setLng(lonLL);
-			mapaMarker.setVisible(true);
-			mapaPoligono.setVisible(false);
+			mapaMarker.setParent(mapa);
 		} else {
 
-			mapaMarker.setVisible(false);
-			mapaPoligono.setVisible(true);
+			mapaPoligono = new Gpolygon();
 
 			LatLng pontoLL = new LatLng(latLL, lonLL);
 			LatLng pontoUL = new LatLng(latLL, lonUR);
@@ -150,6 +148,8 @@ public class SpecificOffering extends SelectorComposer<Component> {
 			mapaPoligono.addPath(pontoUL);
 			mapaPoligono.addPath(pontoUR);
 			mapaPoligono.addPath(pontoLR);
+
+			mapaPoligono.setParent(mapa);
 
 			log.warn("Ponto LL = {} , {}", latLL, lonLL);
 			log.warn("Ponto UR = {} , {}", latUR, lonUR);
@@ -173,7 +173,10 @@ public class SpecificOffering extends SelectorComposer<Component> {
 			// mapa.setZoom(5);
 		}
 
-		ZkUtils.scaleMap(mapa, 300, latLL, latUR, lonLL, lonUR);
+		log.warn("Coordenadas:\n{}\n{}\n{}\n{}", latLL, lonLL, latUR + 0.01,
+				lonUR + 0.01);
+
+		ZkUtils.scaleMap(mapa, 300, latLL, latUR + 0.01, lonLL, lonUR + 0.01);
 		montaGrid();
 
 	}
@@ -191,9 +194,6 @@ public class SpecificOffering extends SelectorComposer<Component> {
 
 		log.info("O sensor {} possui {} leituras.", oferta.getName(),
 				leituras.size());
-
-		mapaMarker.setContent("Esse sensor possui " + leituras.size()
-				+ " leituras registradas");
 
 		ListModel<Object> listModel = new ListModelList<Object>(leituras);
 		gridLeituras.setModel(listModel);
@@ -231,20 +231,33 @@ public class SpecificOffering extends SelectorComposer<Component> {
 				img.setStyle("cursor: pointer;");
 
 				// Link para a pagina da leitura
-				img.addEventListener("onClick", new MyListener());
+				img.addEventListener("onClick", new MyListener(id));
 			}
 
 		});
 
-		botaoLeituras.setVisible(false);
+		// botaoLeituras.setVisible(false);
 		gridLeituras.setVisible(true);
 	}
 
 	@SuppressWarnings("rawtypes")
 	public class MyListener implements EventListener {
+
+		private String url;
+
+		public MyListener(String url) {
+			super();
+			this.url = url;
+		}
+
 		public void onEvent(Event event) {
-			Clients.alert("Nome do evento: " + event.getName()
-					+ "\nClasse do evento: " + event.getClass().toString());
+
+			if (url == null) {
+				log.error("Erro: url eh null");
+				return;
+			}
+
+			Executions.sendRedirect("http://" + url);
 
 		}
 	}

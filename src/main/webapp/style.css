@@ -1,6 +1,16 @@
 /* Arquivos com css hardcoded: */
 /*  - /proteger/offering.zul */
 /*  - /proteger/procedure.zul */
+/* .z-loading { */
+/* 	top: 50% !important; */
+/* 	left: 45% !important; */
+/* 	align: center; */
+/* 	vertical-align: middle; */
+/* } */
+.titulo {
+	font-size: 1.6em
+}
+
 .borda-azul {
 	border: 2px solid #102d35;
 }

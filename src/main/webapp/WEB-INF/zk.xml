@@ -11,4 +11,8 @@
 		<richlet-name>SWERequest</richlet-name>
 		<url-pattern>/swe/*</url-pattern>
 	</richlet-mapping>
+
+<!-- 	<language-config> -->
+<!-- 		<addon-uri>/WEB-INF/lang-addon.xml</addon-uri> -->
+<!-- 	</language-config> -->
 </zk>
