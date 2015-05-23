@@ -49,17 +49,18 @@
 		</north>
 		<center id="mainContent" autoscroll="true"
 			apply="br.ufjf.hydronode.paginas.procedure.SpecificProcedure">
-			<vbox vflex="1" hflex="1" align="center" spacing="20px"
+			<vbox vflex="1" hflex="1" align="center" spacing="10px"
 				sclass="demo-main">
 
+				<separator />
 				<label id="titulo" value="Detalhes da Estação"
-					sclass="head1" />
-
+					sclass="titulo" />
 
 				<vlayout>
-					<grid width="700px" align="center">
+					<grid hflex="min" align="center"
+						sclass="meu-grid">
 						<columns>
-							<column align="right" hflex="min" />
+							<column align="right" valign="top" />
 							<column />
 						</columns>
 						<rows>
@@ -81,7 +82,9 @@
 							</row>
 							<row>
 								<cell sclass="row-title">
-									Propriedades Observadas :
+									<vlayout>
+										Propriedades Observadas :
+									</vlayout>
 								</cell>
 								<cell>
 									<vlayout id="observableProperties" />
@@ -105,19 +108,18 @@
 						</rows>
 					</grid>
 
+					<separator />
+
 					<label id="tituloMapa"
-						value="Geolocalização das Leituras" sclass="head2" />
+						value="Geolocalização das Leituras" sclass="head1" />
 
 					<label id="texto"
-						value="Os sensores dessa estação ainda não registraram leituras." />
+						value="Os sensores dessa estação ainda não registraram leituras."
+						visible="false" />
 
 					<div sclass="borda-azul">
-						<gmaps id="mapa" width="500px" height="300px"
-							showSmallCtrl="true" visible="false">
-
-							<ginfo id="mapaInfo" open="false" />
-							<gpolygon id="mapaPoligono" />
-
+						<gmaps id="mapa" width="815px" height="490px"
+							showSmallCtrl="true">
 						</gmaps>
 					</div>
 

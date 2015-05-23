@@ -60,7 +60,7 @@
 					<grid hflex="min" align="center"
 						sclass="meu-grid">
 						<columns>
-							<column align="right" />
+							<column align="right" valign="top" />
 							<column />
 						</columns>
 						<rows>

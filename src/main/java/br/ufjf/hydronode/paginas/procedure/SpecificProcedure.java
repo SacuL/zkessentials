@@ -1,13 +1,15 @@
 package br.ufjf.hydronode.paginas.procedure;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.zkoss.gmaps.Gmaps;
+import org.zkoss.gmaps.Gmarker;
 import org.zkoss.gmaps.Gpolygon;
 import org.zkoss.gmaps.LatLng;
 import org.zkoss.zk.ui.Component;
@@ -15,9 +17,11 @@ import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zul.Button;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Vlayout;
 
+import br.ufjf.hydronode.Config;
 import br.ufjf.hydronode.jsons.ZkUtils;
 import br.ufjf.hydronode.paginas.offering.Content;
 import br.ufjf.hydronode.sos.SOSModel;
@@ -36,7 +40,6 @@ public class SpecificProcedure extends SelectorComposer<Component> {
 	@Wire
 	private Gmaps mapa;
 
-	@Wire
 	private Gpolygon mapaPoligono;
 
 	private Object url;
@@ -66,22 +69,21 @@ public class SpecificProcedure extends SelectorComposer<Component> {
 			return;
 		}
 
-		procedure.setValue(ofertas.get(0).getProcedure().get(0));
+		procedure.setValue(ofertas.get(0).getProcedure().get(0)
+				.replace(Config.urlServidor + Config.procedure, ""));
 		nSensores.setValue(Integer.toString(ofertas.size()));
-		mapa.setVisible(false);
-		texto.setVisible(true);
 
 		Double latLL = null;
 		Double lonLL = null;
 		Double latUR = null;
 		Double lonUR = null;
 
-		Map<String, Label> labels = new HashMap<String, Label>();
+		// Set usado para guardar, sem repeticao, as propriedades observadas
+		Set<String> propriedades = new HashSet<String>();
 
 		for (Content c : ofertas) {
-			Label label = new Label(c.getObservableProperty().get(0));
-			label.setWidth("400px");
-			labels.put(c.getObservableProperty().get(0), label);
+
+			propriedades.add(c.getObservableProperty().get(0));
 
 			if (c.getObservedArea() != null) {
 
@@ -120,49 +122,50 @@ public class SpecificProcedure extends SelectorComposer<Component> {
 			}
 		}
 
-		for (Map.Entry<String, Label> l : labels.entrySet()) {
-			observableProperties.appendChild(l.getValue());
+		// Para cada propriedade observada cria um botao com o link
+		for (String p : propriedades) {
+			Button b = new Button(p.replace(Config.urlServidor
+					+ Config.observableProperty, ""));
+			b.setHref("http://" + p);
+			observableProperties.appendChild(b);
 		}
 
 		if (latLL == null || lonLL == null || latUR == null || lonUR == null) {
 			log.info("As ofertas desse procedure nao possuem leituras");
+			mapa.setVisible(false);
+			texto.setVisible(true);
 			return;
 		}
 
-		mapa.setVisible(true);
-		texto.setVisible(false);
+		if (latLL.equals(latUR) && (lonLL.equals(lonUR))) {
+			log.info("Eh um ponto e nao uma area");
+			Gmarker mapaMarker = new Gmarker();
+			mapaMarker.setLat(latLL);
+			mapaMarker.setLng(lonLL);
+			mapaMarker.setParent(mapa);
+		} else {
 
-		LatLng pontoLL = new LatLng(latLL, lonLL);
-		LatLng pontoUL = new LatLng(latLL, lonUR);
-		LatLng pontoLR = new LatLng(latUR, lonLL);
-		LatLng pontoUR = new LatLng(latUR, lonUR);
+			LatLng pontoLL = new LatLng(latLL, lonLL);
+			LatLng pontoUL = new LatLng(latLL, lonUR);
+			LatLng pontoLR = new LatLng(latUR, lonLL);
+			LatLng pontoUR = new LatLng(latUR, lonUR);
 
-		mapaPoligono.addPath(pontoLL);
-		mapaPoligono.addPath(pontoUL);
-		mapaPoligono.addPath(pontoUR);
-		mapaPoligono.addPath(pontoLR);
+			mapaPoligono = new Gpolygon();
+
+			mapaPoligono.addPath(pontoLL);
+			mapaPoligono.addPath(pontoUL);
+			mapaPoligono.addPath(pontoUR);
+			mapaPoligono.addPath(pontoLR);
+
+			mapaPoligono.setParent(mapa);
+		}
 
 		log.warn("Ponto LL = {} , {}", latLL, lonLL);
 		log.warn("Ponto UR = {} , {}", latUR, lonUR);
 		log.warn("Ponto UL = {} , {}", latLL, lonUR);
 		log.warn("Ponto LR = {} , {}", latUR, lonLL);
 
-		// Calculo do centro do retangulo
-		// Double centroX, centroY;
-		// if (latUR > latLL) {
-		// centroX = ((latUR - latLL) / 2) + latLL;
-		// } else {
-		// centroX = ((latLL - latUR) / 2) + latUR;
-		// }
-		// if (lonUR > lonLL) {
-		// centroY = ((lonUR - lonLL) / 2) + lonLL;
-		// } else {
-		// centroY = ((lonLL - lonUR) / 2) + lonUR;
-		// }
-
-		// mapa.panTo(centroX, centroY);
-		// mapa.setZoom(5);
-		ZkUtils.scaleMap(mapa, 300, latLL, latUR, lonLL, lonUR);
+		ZkUtils.scaleMap(mapa, 300, latLL, latUR + 0.003, lonLL, lonUR + 0.003);
 
 	}
 

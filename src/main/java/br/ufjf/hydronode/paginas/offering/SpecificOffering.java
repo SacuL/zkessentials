@@ -137,12 +137,12 @@ public class SpecificOffering extends SelectorComposer<Component> {
 			mapaMarker.setParent(mapa);
 		} else {
 
-			mapaPoligono = new Gpolygon();
-
 			LatLng pontoLL = new LatLng(latLL, lonLL);
 			LatLng pontoUL = new LatLng(latLL, lonUR);
 			LatLng pontoLR = new LatLng(latUR, lonLL);
 			LatLng pontoUR = new LatLng(latUR, lonUR);
+
+			mapaPoligono = new Gpolygon();
 
 			mapaPoligono.addPath(pontoLL);
 			mapaPoligono.addPath(pontoUL);
@@ -150,33 +150,17 @@ public class SpecificOffering extends SelectorComposer<Component> {
 			mapaPoligono.addPath(pontoLR);
 
 			mapaPoligono.setParent(mapa);
-
-			log.warn("Ponto LL = {} , {}", latLL, lonLL);
-			log.warn("Ponto UR = {} , {}", latUR, lonUR);
-			log.warn("Ponto UL = {} , {}", latLL, lonUR);
-			log.warn("Ponto LR = {} , {}", latUR, lonLL);
-
-			// // Calculo do centro do retangulo
-			// Double centroX, centroY;
-			// if (latUR > latLL) {
-			// centroX = ((latUR - latLL) / 2) + latLL;
-			// } else {
-			// centroX = ((latLL - latUR) / 2) + latUR;
-			// }
-			// if (lonUR > lonLL) {
-			// centroY = ((lonUR - lonLL) / 2) + lonLL;
-			// } else {
-			// centroY = ((lonLL - lonUR) / 2) + lonUR;
-			// }
-			//
-			// mapa.panTo(centroX, centroY);
-			// mapa.setZoom(5);
 		}
 
-		log.warn("Coordenadas:\n{}\n{}\n{}\n{}", latLL, lonLL, latUR + 0.01,
-				lonUR + 0.01);
+		log.warn("Ponto LL = {} , {}", latLL, lonLL);
+		log.warn("Ponto UR = {} , {}", latUR, lonUR);
+		log.warn("Ponto UL = {} , {}", latLL, lonUR);
+		log.warn("Ponto LR = {} , {}", latUR, lonLL);
 
-		ZkUtils.scaleMap(mapa, 300, latLL, latUR + 0.01, lonLL, lonUR + 0.01);
+		log.warn("Coordenadas para centralizacao do mapa:\n{}\n{}\n{}\n{}",
+				latLL, lonLL, latUR + 0.009, lonUR + 0.009);
+
+		ZkUtils.scaleMap(mapa, 300, latLL, latUR + 0.003, lonLL, lonUR + 0.003);
 		montaGrid();
 
 	}
