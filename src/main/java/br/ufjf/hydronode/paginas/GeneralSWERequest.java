@@ -58,12 +58,13 @@ public class GeneralSWERequest extends GenericRichlet {
 				pagina = "/proteger/procedure.zul";
 			}
 		} else if (operacao.equalsIgnoreCase("observedProperty")) {
+			// TODO
 			pagina = "/proteger/observedproperty.zul";
 		} else {
 			log.warn("requisicao contem apenas /swe/");
 		}
 
-		log.warn("Pagina: {}", pagina);
+		log.warn("Pagina: {}\nURL: {}", pagina, args.get("url"));
 		// attach to page as root if parent is null
 		Executions.createComponents(pagina, page.getFirstRoot(), args);
 

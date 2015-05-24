@@ -6,17 +6,24 @@
 		</north>
 		<center id="mainContent" autoscroll="true"
 			apply="br.ufjf.hydronode.paginas.offering.Offering">
-			<vbox vflex="1" hflex="1" align="center" spacing="20px"
+			<vbox vflex="1" hflex="1" align="center" spacing="10px"
 				sclass="demo-main">
 
-				<label value="Sensores Registrados" sclass="head1" />
-				<grid id="gridOffering">
-					<columns>
-						<column label="Nome" />
-						<column label="Procedimento" />
-						<column label="Propriedade Observada" />
-					</columns>
-				</grid>
+				<separator />
+				<label id="titulo" value="Sensores Registrados"
+					sclass="titulo" />
+
+				<vlayout>
+					<grid hflex="min" id="gridOffering"
+						sclass="meu-grid">
+
+						<columns>
+							<column label="Nome" />
+							<column label="Procedimento" />
+							<column label="Propriedade Observada" />
+						</columns>
+					</grid>
+				</vlayout>
 
 			</vbox>
 		</center>

@@ -19,7 +19,7 @@ import org.zkoss.zk.ui.metainfo.ComponentInfo;
 import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
-import org.zkoss.zul.Button;
+import org.zkoss.zul.A;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Vlayout;
 
@@ -133,7 +133,7 @@ public class SpecificProcedure extends SelectorComposer<Component> {
 
 		// Para cada propriedade observada cria um botao com o link
 		for (String p : propriedades) {
-			Button b = new Button(p.replace(Config.urlServidor
+			A b = new A(p.replace(Config.urlServidor
 					+ Config.observableProperty, ""));
 			b.setHref("http://" + p);
 			observableProperties.appendChild(b);

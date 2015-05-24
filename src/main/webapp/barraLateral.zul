@@ -1,7 +1,0 @@
-<grid hflex="1" vflex="1" sclass="sidebar" id="gridBarraLateral">
-	<columns>
-		<column width="42px" />
-		<column />
-	</columns>
-	<rows />
-</grid>

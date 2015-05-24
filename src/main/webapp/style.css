@@ -98,9 +98,12 @@
 }
 
 .demo-main a,.demo-main a:VISITED {
-	color: #636363;
-	text-decoration: underline;
-	font-size: smaller;
+	color: #3090FC;
+	text-decoration: none;
+}
+.demo-main a:HOVER {
+	color: #0E509C;
+	text-decoration: none;
 }
 
 .todo-box {

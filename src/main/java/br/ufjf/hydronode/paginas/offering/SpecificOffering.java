@@ -19,7 +19,7 @@ import org.zkoss.zk.ui.metainfo.ComponentInfo;
 import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
-import org.zkoss.zul.Button;
+import org.zkoss.zul.A;
 import org.zkoss.zul.Grid;
 import org.zkoss.zul.Image;
 import org.zkoss.zul.Label;
@@ -42,7 +42,7 @@ public class SpecificOffering extends SelectorComposer<Component> {
 			tituloLeituras;
 
 	@Wire
-	private Button procedure, observableProperty;
+	private A procedure, observableProperty;
 
 	@Wire
 	private Gmaps mapa;
