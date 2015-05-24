@@ -7,6 +7,19 @@
 /* 	align: center; */
 /* 	vertical-align: middle; */
 /* } */
+.meu-menubar {
+	background-image: none;
+	background-color: #102d35;
+	border: 0;
+}
+
+.meu-menubar .z-menu-text {
+	color: white;
+	font-size: 1.0em;
+	text-shadow: -1px 0 #102d35, 0 1px #102d35, 1px 0 #102d35, 0 -1px
+		#102d35;
+}
+
 .titulo {
 	font-size: 1.6em
 }

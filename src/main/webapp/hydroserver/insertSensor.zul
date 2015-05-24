@@ -4,9 +4,6 @@
 		<north height="50px" border="none">
 			<include src="/cabecalho.zul" />
 		</north>
-		<west width="200px" border="none">
-			<include src="/barraLateral.zul" />
-		</west>
 		<center id="mainContent" autoscroll="true"
 			apply="br.ufjf.hydronode.requisicoes.InsertSensor">
 			<vlayout>

@@ -1,5 +1,4 @@
-<grid hflex="1" vflex="1" sclass="sidebar" id="gridBarraLateral"
-	apply="br.ufjf.hydronode.paginas.barralateral.BarraLateralController">
+<grid hflex="1" vflex="1" sclass="sidebar" id="gridBarraLateral">
 	<columns>
 		<column width="42px" />
 		<column />
