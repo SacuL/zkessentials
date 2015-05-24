@@ -4,6 +4,9 @@
 		<north height="50px" border="none">
 			<include src="/cabecalho.zul" />
 		</north>
+		<west width="200px" border="none">
+			<include src="/barraLateral.zul" />
+		</west>
 		<center id="mainContent" autoscroll="true"
 			apply="br.ufjf.hydronode.paginas.offering.Offering">
 			<vbox vflex="1" hflex="1" align="center" spacing="20px"

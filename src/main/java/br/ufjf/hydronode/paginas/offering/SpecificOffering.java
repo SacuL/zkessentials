@@ -19,7 +19,6 @@ import org.zkoss.zk.ui.metainfo.ComponentInfo;
 import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
-import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Grid;
 import org.zkoss.zul.Image;
@@ -39,7 +38,8 @@ public class SpecificOffering extends SelectorComposer<Component> {
 	static Logger log = LoggerFactory.getLogger(SpecificOffering.class);
 
 	@Wire
-	private Label titulo, name, localizacaoX, localizacaoY, texto;
+	private Label titulo, name, localizacaoX, localizacaoY, texto,
+			tituloLeituras;
 
 	@Wire
 	private Button procedure, observableProperty;
@@ -101,6 +101,7 @@ public class SpecificOffering extends SelectorComposer<Component> {
 			// Ainda não há leituras
 			mapa.setVisible(false);
 			texto.setVisible(true);
+			tituloLeituras.setVisible(false);
 			return;
 		} else {
 			// Só pra garantir
@@ -168,12 +169,12 @@ public class SpecificOffering extends SelectorComposer<Component> {
 
 	// @Listen("onClick = button#botaoLeituras")
 	public void montaGrid() {
-		if (oferta == null || oferta.getIdentifier() == null
-				|| oferta.getIdentifier().isEmpty()) {
-			log.info("Oferta vazia (null) ou inválida.");
-			Clients.showNotification("Erro: Esse sensor é inválido. Recarregue a página e tente novamente.");
-			return;
-		}
+		// if (oferta == null || oferta.getIdentifier() == null
+		// || oferta.getIdentifier().isEmpty()) {
+		// log.info("Oferta vazia (null) ou inválida.");
+		// Clients.showNotification("Erro: Esse sensor é inválido. Recarregue a página e tente novamente.");
+		// return;
+		// }
 		List<Observation> leituras = SOSModel
 				.getObservationsPorOfferring(oferta.getIdentifier());
 
