@@ -126,6 +126,10 @@
 						visible="false"
 						style="font-size: medium; padding-top: 8px; padding-bottom: 7px; padding-left: 9px; padding-right: 9px;" />
 
+					<separator />
+					<label id="tituloLeituras"
+						value="Leituras Registradas" sclass="head1" />
+
 					<grid width="815px" id="gridLeituras"
 						visible="false" align="center">
 						<columns>

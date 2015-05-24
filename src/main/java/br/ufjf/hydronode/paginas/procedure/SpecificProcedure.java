@@ -14,6 +14,8 @@ import org.zkoss.gmaps.Gpolygon;
 import org.zkoss.gmaps.LatLng;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.Page;
+import org.zkoss.zk.ui.metainfo.ComponentInfo;
 import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
@@ -44,31 +46,38 @@ public class SpecificProcedure extends SelectorComposer<Component> {
 
 	private Object url;
 
+	private List<Content> ofertas;
+
 	@Override
-	public void doAfterCompose(Component window) throws Exception {
+	public ComponentInfo doBeforeCompose(Page page, Component parent,
+			ComponentInfo compInfo) {
+
+		// Pega o atributo url que foi passado como argumento
 		url = Executions.getCurrent().getArg().get("url");
-		log.warn("URL after compose: {}", url);
-		super.doAfterCompose(window);
+		log.warn("URL before compose: {}", url);
+		if (url == null || url.getClass() != String.class) {
+			log.error("Erro ao ler Arg da Page (vazio ou tipo incorreto).");
+			redirecionaAoIndex();
+			return null;
+		}
+
+		// Busca os sensores da estação no banco de dados
+		String urlEstacao = (String) url;
+		ofertas = SOSModel.buscaProcedure(urlEstacao);
+		if (ofertas == null) {
+			log.error("Erro ao buscar os sensores da estação");
+			redirecionaAoIndex();
+			return null;
+		}
+
+		return super.doBeforeCompose(page, parent, compInfo);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Listen("onCreate= #mainContent")
 	public void exibeOferta() {
 
-		if (url == null || url.getClass() != String.class) {
-			log.error("Erro ao ler Arg da Page (vazio ou tipo incorreto).");
-			return;
-		}
-
-		String urlOferta = (String) url;
-
-		List<Content> ofertas = SOSModel.buscaProcedure(urlOferta);
-
-		if (ofertas == null) {
-			log.error("Erro ao buscar as ofertas da procedure.");
-			return;
-		}
-
+		// Preenche o grid com as informações da estação
 		procedure.setValue(ofertas.get(0).getProcedure().get(0)
 				.replace(Config.urlServidor + Config.procedure, ""));
 		nSensores.setValue(Integer.toString(ofertas.size()));
@@ -78,7 +87,7 @@ public class SpecificProcedure extends SelectorComposer<Component> {
 		Double latUR = null;
 		Double lonUR = null;
 
-		// Set usado para guardar, sem repeticao, as propriedades observadas
+		// Set usado para guardar, sem repetição, as propriedades observadas
 		Set<String> propriedades = new HashSet<String>();
 
 		for (Content c : ofertas) {
@@ -167,6 +176,13 @@ public class SpecificProcedure extends SelectorComposer<Component> {
 
 		ZkUtils.scaleMap(mapa, 300, latLL, latUR + 0.003, lonLL, lonUR + 0.003);
 
+	}
+
+	/**
+	 * Redireciona para a página inicial das estações.
+	 */
+	private void redirecionaAoIndex() {
+		Executions.sendRedirect("/swe/estacao/");
 	}
 
 }

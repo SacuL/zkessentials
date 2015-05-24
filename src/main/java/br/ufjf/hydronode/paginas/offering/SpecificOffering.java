@@ -12,8 +12,10 @@ import org.zkoss.gmaps.Gpolygon;
 import org.zkoss.gmaps.LatLng;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.Page;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
+import org.zkoss.zk.ui.metainfo.ComponentInfo;
 import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
@@ -26,6 +28,7 @@ import org.zkoss.zul.ListModel;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Row;
 import org.zkoss.zul.RowRenderer;
+
 import br.ufjf.hydronode.Config;
 import br.ufjf.hydronode.jsons.ZkUtils;
 import br.ufjf.hydronode.jsons.observationModel.Observation;
@@ -48,9 +51,6 @@ public class SpecificOffering extends SelectorComposer<Component> {
 
 	private Gmarker mapaMarker;
 
-	// @Wire
-	// private Button botaoLeituras;
-
 	@Wire
 	private Grid gridLeituras;
 
@@ -59,32 +59,35 @@ public class SpecificOffering extends SelectorComposer<Component> {
 	private Content oferta;
 
 	@Override
-	public void doAfterCompose(Component window) throws Exception {
+	public ComponentInfo doBeforeCompose(Page page, Component parent,
+			ComponentInfo compInfo) {
+
+		// Pega o atributo url que foi passado como argumento
 		url = Executions.getCurrent().getArg().get("url");
-		log.warn("URL after compose: {}", url);
-		super.doAfterCompose(window);
+		log.warn("URL before compose: {}", url);
+		if (url == null || url.getClass() != String.class) {
+			log.error("Erro ao ler Arg da Page (vazio ou tipo incorreto).");
+			redirecionaAoIndex();
+			return null;
+		}
+
+		// Busca o sensor no banco de dados
+		String urlOferta = (String) url;
+		oferta = SOSModel.buscaOffering(urlOferta);
+		if (oferta == null) {
+			log.error("Erro ao buscar a oferta");
+			redirecionaAoIndex();
+			return null;
+		}
+
+		return super.doBeforeCompose(page, parent, compInfo);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Listen("onCreate= #mainContent")
 	public void exibeOferta() {
 
-		if (url == null || url.getClass() != String.class) {
-			log.error("Erro ao ler Arg da Page (vazio ou tipo incorreto).");
-			return;
-		}
-
-		String urlOferta = (String) url;
-
-		oferta = SOSModel.buscaOffering(urlOferta);
-
-		if (oferta == null) {
-			log.error("Erro ao buscar a oferta");
-			// botaoLeituras.setVisible(false);
-			texto.setVisible(false);
-			return;
-		}
-
+		// Preenche o grid com as informações do sensor
 		name.setValue(oferta.getName());
 		procedure.setHref("http://" + oferta.getProcedure().get(0));
 		procedure.setLabel(oferta.getProcedure().get(0)
@@ -95,16 +98,14 @@ public class SpecificOffering extends SelectorComposer<Component> {
 				.replace(Config.urlServidor + Config.observableProperty, ""));
 
 		if (oferta.getObservedArea() == null) {
-			// ainda nao ha leituras
+			// Ainda não há leituras
 			mapa.setVisible(false);
 			texto.setVisible(true);
-			// botaoLeituras.setVisible(false);
 			return;
 		} else {
-			// so pra garantir
+			// Só pra garantir
 			mapa.setVisible(true);
 			texto.setVisible(false);
-			// botaoLeituras.setVisible(true);
 		}
 
 		// ///////
@@ -222,6 +223,13 @@ public class SpecificOffering extends SelectorComposer<Component> {
 
 		// botaoLeituras.setVisible(false);
 		gridLeituras.setVisible(true);
+	}
+
+	/**
+	 * Redireciona para a pagina inicial dos sensores.
+	 */
+	private void redirecionaAoIndex() {
+		Executions.sendRedirect("/swe/sensor/");
 	}
 
 	@SuppressWarnings("rawtypes")

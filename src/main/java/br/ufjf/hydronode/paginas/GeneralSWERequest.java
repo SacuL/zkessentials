@@ -25,24 +25,45 @@ public class GeneralSWERequest extends GenericRichlet {
 		Map<String, String> args = new HashMap<String, String>();
 		args.put("url", Config.urlServidor + requestPath);
 
-		// /offering/asdasdas
 		if (!requestPath.substring(1).contains("/")) {
-			// caminho invalido, redirecionar para outra pagina
+			// A pagina requisitada foi /swe/algoinvalido
+			// caminho invalido, redirecionar para index da swe
+			log.warn("Requisicao swe invalida");
+			Executions.createComponents("", page.getFirstRoot(), args);
+			return;
 		}
+
 		String operacao = requestPath.substring(0, requestPath.substring(1)
 				.indexOf("/") + 2);
+
+		boolean vazia = false;
+		if (requestPath.replace(operacao + "index.zul", "").isEmpty()) {
+			log.warn("Requisicao vazia");
+			vazia = true;
+		}
 
 		// mudar para uma pagina padrao (ou dar um foward?)
 		String pagina = "";
 
 		if (operacao.equalsIgnoreCase(Config.offering)) {
-			pagina = "/proteger/offering.zul";
+			if (vazia) {
+				pagina = "/sensor/";
+			} else {
+				pagina = "/proteger/offering.zul";
+			}
 		} else if (operacao.equalsIgnoreCase(Config.procedure)) {
-			pagina = "/proteger/procedure.zul";
+			if (vazia) {
+				pagina = "/estacao/";
+			} else {
+				pagina = "/proteger/procedure.zul";
+			}
 		} else if (operacao.equalsIgnoreCase("observedProperty")) {
 			pagina = "/proteger/observedproperty.zul";
+		} else {
+			log.warn("requisicao contem apenas /swe/");
 		}
 
+		log.warn("Pagina: {}", pagina);
 		// attach to page as root if parent is null
 		Executions.createComponents(pagina, page.getFirstRoot(), args);
 
