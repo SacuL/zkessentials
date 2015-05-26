@@ -38,8 +38,8 @@ public class SpecificOffering extends SelectorComposer<Component> {
 	static Logger log = LoggerFactory.getLogger(SpecificOffering.class);
 
 	@Wire
-	private Label titulo, name, localizacaoX, localizacaoY, texto,
-			tituloLeituras;
+	private Label titulo, name, localizacaoX, localizacaoY, texto, texto2,
+			tituloLeituras, tituloPagina;
 
 	@Wire
 	private A procedure, observableProperty;
@@ -87,6 +87,9 @@ public class SpecificOffering extends SelectorComposer<Component> {
 	@Listen("onCreate= #mainContent")
 	public void exibeOferta() {
 
+		// Preenche o titulo da pagina
+		tituloPagina.setValue(oferta.getName());
+
 		// Preenche o grid com as informações do sensor
 		name.setValue(oferta.getName());
 		procedure.setHref("http://" + oferta.getProcedure().get(0));
@@ -101,12 +104,8 @@ public class SpecificOffering extends SelectorComposer<Component> {
 			// Ainda não há leituras
 			mapa.setVisible(false);
 			texto.setVisible(true);
-			tituloLeituras.setVisible(false);
+			texto2.setVisible(true);
 			return;
-		} else {
-			// Só pra garantir
-			mapa.setVisible(true);
-			texto.setVisible(false);
 		}
 
 		// ///////

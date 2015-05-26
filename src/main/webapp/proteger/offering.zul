@@ -1,5 +1,10 @@
 <zk>
 	<style>
+		.div-titulo{background-color: #658e9c ;}
+
+		.div-titulo-pagina{background-color: #EBF0F5 ; border-radius:
+		20px;}
+
 		.meu-menubar { background-image: none; background-color:
 		#102d35; border: 0; }
 
@@ -7,11 +12,13 @@
 		text-shadow: -1px 0 #102d35, 0 1px #102d35, 1px 0 #102d35, 0
 		-1px #102d35; }
 
-		.titulo { font-size: 1.6em }
+		.titulo { font-size: 1.5em; color: #D4D4D4;}
 
-		.borda-azul { border: 2px solid #102d35; }
+		.titulo-pagina { font-size: 1.6em; color: #235E6E;}
 
-		.meu-grid { min-width: 350px }
+		.borda-azul { border: 1px solid #CFCFCF; }
+
+		.meu-grid { width: 820px ; margin-top: 5px;}
 
 		.banner { background-color: #102d35; color: white; padding: 5px;
 		}
@@ -49,111 +56,164 @@
 		text-decoration: none; } .demo-main a:HOVER { color: #0E509C;
 		text-decoration: none; }
 
+		.demo-main { margin-left: auto; margin-right: auto; }
+
 		.todo-box { padding-right: 4px; }
 	</style>
 	<borderlayout hflex="1" vflex="1">
+
+		<!-- Cabecaçalho -->
 		<north height="50px" border="none">
 			<include src="/cabecalho.zul" />
 		</north>
+
+		<!-- Principal -->
 		<center id="mainContent" autoscroll="true"
 			apply="br.ufjf.hydronode.paginas.offering.SpecificOffering">
-			<vbox vflex="1" hflex="1" align="center" spacing="10px"
+
+			<vbox vflex="1" width="820px" align="center" spacing="10px"
 				sclass="demo-main">
 
 				<separator />
-				<label id="titulo" value="Detalhes do Sensor"
-					sclass="titulo" />
 
-				<vlayout>
-					<grid hflex="min" align="center"
-						sclass="meu-grid">
-						<columns>
-							<column align="right" valign="top" />
-							<column />
-						</columns>
-						<rows>
-							<row>
-								<cell sclass="row-title">Nome :</cell>
-								<cell>
-									<label id="name" width="400px" />
-								</cell>
-							</row>
-							<row>
-								<cell sclass="row-title">
-									Estação :
-								</cell>
-								<cell>
-									<a id="procedure" />
-								</cell>
-							</row>
-							<row>
-								<cell sclass="row-title">
-									Propriedade Observada :
-								</cell>
-								<cell>
-									<a id="observableProperty" />
-								</cell>
-							</row>
-							<row visible="false">
-								<cell sclass="row-title">
-									Observed Area :
-								</cell>
-								<cell>
-									<hlayout>
-										<label id="localizacaoX"
-											width="193px" />
-										<label value="," />
-										<label id="localizacaoY"
-											width="193px" />
-									</hlayout>
-								</cell>
-							</row>
-
-						</rows>
-					</grid>
-
+				<div sclass="div-titulo-pagina">
 					<separator />
-					<label id="tituloMapa"
-						value="Geolocalização das Leituras" sclass="head1" />
-
-					<label id="texto"
-						value="Esse sensor ainda não registrou leituras." />
-
-					<div sclass="borda-azul">
-						<gmaps id="mapa" width="815px" height="490px"
-							showSmallCtrl="true" visible="false">
-
-							<!-- 							<gmarker id="mapaMarker" open="true" /> -->
-							<!-- 							<ginfo id="mapaInfo" open="false" /> -->
-							<!-- 							<gpolygon id="mapaPoligono" visible="false" /> -->
-
-						</gmaps>
-					</div>
-
-					<button id="botaoLeituras" label="Exibir Leituras"
-						visible="false"
-						style="font-size: medium; padding-top: 8px; padding-bottom: 7px; padding-left: 9px; padding-right: 9px;" />
-
+					<label id="tituloPagina" sclass="titulo-pagina" />
 					<separator />
-					<label id="tituloLeituras"
-						value="Leituras Registradas" sclass="head1" />
+				</div>
 
-					<grid width="815px" id="gridLeituras"
-						visible="false" align="center">
-						<columns>
-							<column label="Identificador" width="200px" />
-							<column label="Localização" width="200px" />
-							<column label="Data/Hora" width="200px" />
-							<column label="Valor" width="150px" />
-							<column label="Detalhes" width="60px"
-								align="center" />
-						</columns>
-					</grid>
+				<tabbox width="100%" sclass="nav_tabs">
+					<tabs id="tabs">
+						<tab label="Detalhes" />
+						<tab label="Geolocalização" />
+						<tab label="Leituras" />
+					</tabs>
+
+					<tabpanels>
+
+						<!--  Aba Detalhes -->
+						<tabpanel>
+							<div sclass="div-titulo">
+								<separator />
+								<label id="titulo"
+									value="Detalhes do Sensor" sclass="titulo" />
+								<separator />
+							</div>
+
+							<grid align="center" sclass="meu-grid">
+								<columns>
+									<column align="right" valign="top"
+										hflex="min" />
+									<column />
+								</columns>
+								<rows>
+									<row>
+										<cell sclass="row-title">
+											Nome :
+										</cell>
+										<cell>
+											<label id="name"
+												width="400px" />
+										</cell>
+									</row>
+									<row>
+										<cell sclass="row-title">
+											Estação :
+										</cell>
+										<cell>
+											<a id="procedure" />
+										</cell>
+									</row>
+									<row>
+										<cell sclass="row-title">
+											Propriedade Observada :
+										</cell>
+										<cell>
+											<a id="observableProperty" />
+										</cell>
+									</row>
+									<row visible="false">
+										<cell sclass="row-title">
+											Observed Area :
+										</cell>
+										<cell>
+											<hlayout>
+												<label id="localizacaoX"
+													width="193px" />
+												<label value="," />
+												<label id="localizacaoY"
+													width="193px" />
+											</hlayout>
+										</cell>
+									</row>
+
+								</rows>
+							</grid>
+						</tabpanel>
+
+						<!--  Aba Geolocalização -->
+
+						<tabpanel>
+							<div sclass="div-titulo">
+								<separator />
+								<label id="tituloMapa"
+									value="Geolocalização das Leituras" sclass="titulo" />
+								<separator />
+							</div>
+
+							<separator />
+
+							<label id="texto"
+								value="Esse sensor ainda não registrou leituras."
+								visible="false" />
+
+							<div sclass="borda-azul">
+								<gmaps id="mapa" width="818px"
+									height="491px" showSmallCtrl="true">
+								</gmaps>
+							</div>
+
+							<button id="botaoLeituras"
+								label="Exibir Leituras" visible="false"
+								style="font-size: medium; padding-top: 8px; padding-bottom: 7px; padding-left: 9px; padding-right: 9px;" />
+						</tabpanel>
 
 
-				</vlayout>
+						<!--  Aba Leituras -->
 
+						<tabpanel>
 
+							<div sclass="div-titulo">
+								<separator />
+								<label id="tituloLeituras"
+									value="Leituras Registradas" sclass="titulo" />
+								<separator />
+							</div>
+
+							<separator />
+
+							<label id="texto2"
+								value="Esse sensor ainda não registrou leituras."
+								visible="false" />
+
+							<grid id="gridLeituras" sclass="meu-grid"
+								align="center">
+								<columns>
+									<column label="Identificador"
+										width="200px" />
+									<column label="Localização"
+										width="200px" />
+									<column label="Data/Hora"
+										width="200px" />
+									<column label="Valor" width="150px" />
+									<column label="Detalhes"
+										width="60px" align="center" />
+								</columns>
+							</grid>
+
+						</tabpanel>
+					</tabpanels>
+				</tabbox>
 
 			</vbox>
 		</center>

@@ -1,5 +1,10 @@
 <zk>
 	<style>
+		.div-titulo{background-color: #658e9c ;}
+
+		.div-titulo-pagina{background-color: #EBF0F5 ; border-radius:
+		20px;}
+
 		.meu-menubar { background-image: none; background-color:
 		#102d35; border: 0; }
 
@@ -7,11 +12,13 @@
 		text-shadow: -1px 0 #102d35, 0 1px #102d35, 1px 0 #102d35, 0
 		-1px #102d35; }
 
-		.titulo { font-size: 1.6em }
+		.titulo { font-size: 1.5em; color: #D4D4D4;}
 
-		.borda-azul { border: 2px solid #102d35; }
+		.titulo-pagina { font-size: 1.6em; color: #235E6E;}
 
-		.meu-grid { min-width: 350px }
+		.borda-azul { border: 1px solid #CFCFCF; }
+
+		.meu-grid { width: 820px ; margin-top: 5px;}
 
 		.banner { background-color: #102d35; color: white; padding: 5px;
 		}
@@ -49,91 +56,164 @@
 		text-decoration: none; } .demo-main a:HOVER { color: #0E509C;
 		text-decoration: none; }
 
+		.demo-main { margin-left: auto; margin-right: auto; }
+
 		.todo-box { padding-right: 4px; }
 	</style>
 	<borderlayout hflex="1" vflex="1">
+
+		<!-- Cabecaçalho -->
 		<north height="50px" border="none">
 			<include src="/cabecalho.zul" />
 		</north>
+
+
+		<!-- Principal -->
+
 		<center id="mainContent" autoscroll="true"
 			apply="br.ufjf.hydronode.paginas.procedure.SpecificProcedure">
-			<vbox vflex="1" hflex="1" align="center" spacing="10px"
+
+			<vbox vflex="1" width="820px" align="center" spacing="10px"
 				sclass="demo-main">
 
 				<separator />
-				<label id="titulo" value="Detalhes da Estação"
-					sclass="titulo" />
 
-				<vlayout>
-					<grid hflex="min" align="center"
-						sclass="meu-grid">
-						<columns>
-							<column align="right" valign="top" />
-							<column />
-						</columns>
-						<rows>
-							<row>
-								<cell sclass="row-title">
-									Identificador :
-								</cell>
-								<cell>
-									<label id="procedure" width="400px" />
-								</cell>
-							</row>
-							<row>
-								<cell sclass="row-title">
-									Número de Sensores :
-								</cell>
-								<cell>
-									<label id="nSensores" width="400px" />
-								</cell>
-							</row>
-							<row>
-								<cell sclass="row-title">
-									<vlayout>
-										Propriedades Observadas :
-									</vlayout>
-								</cell>
-								<cell>
-									<vlayout id="observableProperties" />
-								</cell>
-							</row>
-							<row visible="false">
-								<cell sclass="row-title">
-									Área Observada :
-								</cell>
-								<cell>
-									<hlayout>
-										<label id="localizacaoX"
-											width="193px" />
-										<label value="," />
-										<label id="localizacaoY"
-											width="193px" />
-									</hlayout>
-								</cell>
-							</row>
-
-						</rows>
-					</grid>
-
+				<div sclass="div-titulo-pagina">
 					<separator />
+					<label id="tituloPagina" sclass="titulo-pagina" />
+					<separator />
+				</div>
 
-					<label id="tituloMapa"
-						value="Geolocalização das Leituras" sclass="head1" />
+				<tabbox width="100%" sclass="nav_tabs">
+					<tabs id="tabs">
+						<tab label="Detalhes" />
+						<tab label="Geolocalização" />
+						<tab label="Sensores" />
+					</tabs>
 
-					<label id="texto"
-						value="Os sensores dessa estação ainda não registraram leituras."
-						visible="false" />
-
-					<div sclass="borda-azul">
-						<gmaps id="mapa" width="815px" height="490px"
-							showSmallCtrl="true">
-						</gmaps>
-					</div>
+					<tabpanels>
 
 
-				</vlayout>
+						<!--  Aba Detalhes -->
 
+						<tabpanel>
+							<div sclass="div-titulo">
+								<separator />
+								<label id="titulo"
+									value="Detalhes da Estação" sclass="titulo" />
+								<separator />
+							</div>
+
+
+							<grid sclass="meu-grid">
+								<columns>
+									<column align="right" valign="top"
+										hflex="min" />
+									<column />
+								</columns>
+								<rows>
+									<row>
+										<cell sclass="row-title">
+											Identificador :
+										</cell>
+										<cell>
+											<label id="procedure"
+												width="400px" />
+										</cell>
+									</row>
+									<row>
+										<cell sclass="row-title">
+											Número de Sensores :
+										</cell>
+										<cell>
+											<label id="nSensores"
+												width="400px" />
+										</cell>
+									</row>
+									<row>
+										<cell sclass="row-title">
+											<vlayout>
+												Propriedades Observadas
+												:
+											</vlayout>
+										</cell>
+										<cell>
+											<vlayout
+												id="observableProperties" />
+										</cell>
+									</row>
+									<row visible="false">
+										<cell sclass="row-title">
+											Área Observada :
+										</cell>
+										<cell>
+											<hlayout>
+												<label id="localizacaoX"
+													width="193px" />
+												<label value="," />
+												<label id="localizacaoY"
+													width="193px" />
+											</hlayout>
+										</cell>
+									</row>
+
+								</rows>
+							</grid>
+						</tabpanel>
+
+
+						<!--  Aba Geolocalização -->
+
+						<tabpanel>
+
+							<div sclass="div-titulo">
+								<separator />
+								<label id="tituloMapa"
+									value="Geolocalização das Leituras" sclass="titulo" />
+								<separator />
+							</div>
+
+							<separator />
+
+							<label id="texto"
+								value="Os sensores dessa estação ainda não registraram leituras."
+								visible="false" />
+
+							<div sclass="borda-azul">
+								<gmaps id="mapa" width="818px"
+									height="491px" showSmallCtrl="true">
+								</gmaps>
+							</div>
+
+						</tabpanel>
+
+
+						<!--  Aba Sensores -->
+
+						<tabpanel>
+
+							<div sclass="div-titulo">
+								<separator />
+								<label id="tituloSensores"
+									value="Sensores Registrados" sclass="titulo" />
+								<separator />
+							</div>
+							<separator />
+
+							<grid id="gridSensores" sclass="meu-grid"
+								align="center">
+								<columns>
+									<column label="Nome" width="200px" />
+									<column label="Estação"
+										width="200px" />
+									<column
+										label="Propriedade Observada" width="200px" />
+								</columns>
+							</grid>
+
+						</tabpanel>
+					</tabpanels>
+				</tabbox>
 
 
 			</vbox>

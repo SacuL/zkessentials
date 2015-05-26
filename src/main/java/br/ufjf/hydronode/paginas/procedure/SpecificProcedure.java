@@ -34,7 +34,7 @@ public class SpecificProcedure extends SelectorComposer<Component> {
 
 	@Wire
 	private Label titulo, procedure, nSensores, localizacaoX, localizacaoY,
-			texto;
+			texto, tituloPagina;
 
 	@Wire
 	private Vlayout observableProperties;
@@ -77,9 +77,15 @@ public class SpecificProcedure extends SelectorComposer<Component> {
 	@Listen("onCreate= #mainContent")
 	public void exibeOferta() {
 
+		// Pega o nome da estacao
+		String nome = ofertas.get(0).getProcedure().get(0)
+				.replace(Config.urlServidor + Config.procedure, "");
+
+		// Preenche o titulo da pagina
+		tituloPagina.setValue(nome);
+
 		// Preenche o grid com as informações da estação
-		procedure.setValue(ofertas.get(0).getProcedure().get(0)
-				.replace(Config.urlServidor + Config.procedure, ""));
+		procedure.setValue(nome);
 		nSensores.setValue(Integer.toString(ofertas.size()));
 
 		Double latLL = null;
@@ -131,18 +137,17 @@ public class SpecificProcedure extends SelectorComposer<Component> {
 			}
 		}
 
-		// Para cada propriedade observada cria um botao com o link
+		// Para cada propriedade observada cria um link
 		for (String p : propriedades) {
-			A b = new A(p.replace(Config.urlServidor
+			A a = new A(p.replace(Config.urlServidor
 					+ Config.observableProperty, ""));
-			b.setHref("http://" + p);
-			observableProperties.appendChild(b);
+			a.setHref("http://" + p);
+			observableProperties.appendChild(a);
 		}
 
 		if (latLL == null || lonLL == null || latUR == null || lonUR == null) {
 			log.info("As ofertas desse procedure nao possuem leituras");
 			mapa.setVisible(false);
-			texto.setVisible(true);
 			return;
 		}
 

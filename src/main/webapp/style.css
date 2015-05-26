@@ -7,6 +7,15 @@
 /* 	align: center; */
 /* 	vertical-align: middle; */
 /* } */
+.div-titulo {
+	background-color: #658e9c;
+}
+
+.div-titulo-pagina {
+	background-color: #EBF0F5;
+	border-radius: 20px;
+}
+
 .meu-menubar {
 	background-image: none;
 	background-color: #102d35;
@@ -21,15 +30,22 @@
 }
 
 .titulo {
-	font-size: 1.6em
+	font-size: 1.5em;
+	color: #D4D4D4;
+}
+
+.titulo-pagina {
+	font-size: 1.6em;
+	color: #235E6E;
 }
 
 .borda-azul {
-	border: 2px solid #102d35;
+	border: 1px solid #CFCFCF;
 }
 
 .meu-grid {
-	min-width: 350px
+	width: 820px;
+	margin-top: 5px;
 }
 
 .banner {
@@ -101,9 +117,15 @@
 	color: #3090FC;
 	text-decoration: none;
 }
+
 .demo-main a:HOVER {
 	color: #0E509C;
 	text-decoration: none;
+}
+
+.demo-main {
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .todo-box {
