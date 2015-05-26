@@ -84,7 +84,7 @@
 					<separator />
 				</div>
 
-				<tabbox width="100%" sclass="nav_tabs">
+				<tabbox id="meuTabbox" width="100%" sclass="nav_tabs">
 					<tabs id="tabs">
 						<tab label="Detalhes" />
 						<tab label="Geolocalização" />
@@ -203,11 +203,10 @@
 							<grid id="gridSensores" sclass="meu-grid"
 								align="center">
 								<columns>
-									<column label="Nome" width="200px" />
-									<column label="Estação"
-										width="200px" />
+									<column label="Nome" />
+									<column label="Estação" />
 									<column
-										label="Propriedade Observada" width="200px" />
+										label="Propriedade Observada" />
 								</columns>
 							</grid>
 

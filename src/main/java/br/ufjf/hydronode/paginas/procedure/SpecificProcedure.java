@@ -20,10 +20,16 @@ import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.A;
+import org.zkoss.zul.Center;
+import org.zkoss.zul.Grid;
 import org.zkoss.zul.Label;
+import org.zkoss.zul.ListModel;
+import org.zkoss.zul.SimpleListModel;
+import org.zkoss.zul.Tabbox;
 import org.zkoss.zul.Vlayout;
 
 import br.ufjf.hydronode.Config;
+import br.ufjf.hydronode.jsons.SensorRowRenderer;
 import br.ufjf.hydronode.jsons.ZkUtils;
 import br.ufjf.hydronode.paginas.offering.Content;
 import br.ufjf.hydronode.sos.SOSModel;
@@ -41,6 +47,15 @@ public class SpecificProcedure extends SelectorComposer<Component> {
 
 	@Wire
 	private Gmaps mapa;
+
+	@Wire
+	private Grid gridSensores;
+
+	@Wire
+	private Center mainContent;
+
+	@Wire
+	private Tabbox meuTabbox;
 
 	private Gpolygon mapaPoligono;
 
@@ -96,10 +111,13 @@ public class SpecificProcedure extends SelectorComposer<Component> {
 		// Set usado para guardar, sem repetição, as propriedades observadas
 		Set<String> propriedades = new HashSet<String>();
 
+		// Para cada sensor da estação...
 		for (Content c : ofertas) {
 
+			// Adiciona a propriedade observada ao Set
 			propriedades.add(c.getObservableProperty().get(0));
 
+			// Pega a area observada
 			if (c.getObservedArea() != null) {
 
 				Map<String, Object> loc = c.getObservedArea();
@@ -179,9 +197,20 @@ public class SpecificProcedure extends SelectorComposer<Component> {
 		log.warn("Ponto UL = {} , {}", latLL, lonUR);
 		log.warn("Ponto LR = {} , {}", latUR, lonLL);
 
+		// Centraliza e escala o mapa
 		ZkUtils.scaleMap(mapa, 300, latLL, latUR + 0.003, lonLL, lonUR + 0.003);
 
+		// Cria um ListModel para preencher a lista de sensores
+		ListModel<?> listModel = new SimpleListModel<Object>(ofertas);
+		gridSensores.setModel(listModel);
+		gridSensores.setRowRenderer(new SensorRowRenderer());
+
 	}
+
+	// @Listen("onSelect = tabbox#meuTabbox")
+	// public void invalida() {
+	// meuTabbox.setHeight(null);
+	// }
 
 	/**
 	 * Redireciona para a página inicial das estações.
