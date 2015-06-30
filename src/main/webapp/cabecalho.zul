@@ -6,7 +6,7 @@
 			style="border-radius: 10px;" height="40px" />
 
 		<div width="250px">
-			<label value="Projeto HydroNode" sclass="banner-head-menor" />
+			<label value="Sistema HydroNode" sclass="banner-head-menor" />
 		</div>
 		<hlayout>
 			<menubar id="menubar" width="100%" sclass="meu-menubar"

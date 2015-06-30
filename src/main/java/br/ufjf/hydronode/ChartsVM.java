@@ -16,7 +16,7 @@ public class ChartsVM {
 	@Init
 	public void init() {
 		// prepare chart data
-		type = "bar";
+		type = "line";
 		model = ChartData.getModel();
 	}
 

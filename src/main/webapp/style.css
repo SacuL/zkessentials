@@ -39,6 +39,18 @@
 	color: #235E6E;
 }
 
+.texto-pagina {
+	font-size: 1.0em;
+	color: #102d35;
+	text-align: left;
+}
+
+.texto-secundario {
+	font-size: 0.9em;
+	color: #102d35;
+	text-align: left;
+}
+
 .borda-azul {
 	border: 1px solid #CFCFCF;
 }

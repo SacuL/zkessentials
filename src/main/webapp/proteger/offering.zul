@@ -86,7 +86,7 @@
 					<tabs id="tabs">
 						<tab label="Detalhes" />
 						<tab label="Geolocalização" />
-						<tab label="Leituras" />
+						<tab label="Observações" />
 					</tabs>
 
 					<tabpanels>

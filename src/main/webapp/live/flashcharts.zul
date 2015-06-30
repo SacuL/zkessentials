@@ -9,22 +9,36 @@
 				sclass="demo-main">
 				<vlayout apply="org.zkoss.bind.BindComposer"
 					viewModel="@id('vm') @init('br.ufjf.hydronode.ChartsVM')">
+					<separator />
 
-					<flashchart id="chart" width="570" height="300"
-						style="font-weight:bold" type="@bind(vm.type)"
-						model="@bind(vm.model)" />
+					<div sclass="div-titulo-pagina">
+						<separator />
+						<label value="rsa_1_sensor_temp_1"
+							sclass="titulo-pagina" />
+						<separator />
+					</div>
+
+					<div sclass="borda-azul">
+						<separator />
+						<label sclass="texto-pagina"
+							value="Série temporal do sensor rsa_1_sensor_temp_1: obervações mensais de 2013 e 2014" />
+						<flashchart id="chart" width="800" height="300"
+							style="font-weight:bold" type="@bind(vm.type)"
+							model="@bind(vm.model)" />
+					</div>
 				</vlayout>
-				<vlayout apply="org.zkoss.bind.BindComposer">
-					<radiogroup
-						onCheck="@global-command('configChanged',type=self.selectedItem.value)">
-						<vlayout>
-							<radio value="bar" label="Bar Chart"
-								checked="true" />
-							<radio value="line" label="Line Chart" />
-							<radio value="column" label="Column Plot" />
-						</vlayout>
-					</radiogroup>
-				</vlayout>
+
+				<!-- 				<vlayout apply="org.zkoss.bind.BindComposer"> -->
+				<!-- 					<radiogroup -->
+				<!-- 						onCheck="@global-command('configChanged',type=self.selectedItem.value)"> -->
+				<!-- 						<vlayout> -->
+				<!-- 							<radio value="bar" label="Bar Chart" -->
+				<!-- 								checked="true" /> -->
+				<!-- 							<radio value="line" label="Line Chart" /> -->
+				<!-- 							<radio value="column" label="Column Plot" /> -->
+				<!-- 						</vlayout> -->
+				<!-- 					</radiogroup> -->
+				<!-- 				</vlayout> -->
 			</vbox>
 		</center>
 

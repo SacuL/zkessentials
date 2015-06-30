@@ -169,7 +169,7 @@
 							<div sclass="div-titulo">
 								<separator />
 								<label id="tituloMapa"
-									value="Geolocalização das Leituras" sclass="titulo" />
+									value="Área de Cobertura" sclass="titulo" />
 								<separator />
 							</div>
 
@@ -181,7 +181,7 @@
 
 							<div sclass="borda-azul">
 								<gmaps id="mapa" width="818px"
-									height="491px" showSmallCtrl="true">
+									height="400px" showSmallCtrl="true">
 								</gmaps>
 							</div>
 

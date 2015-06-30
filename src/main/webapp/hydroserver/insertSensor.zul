@@ -1,34 +1,50 @@
 <?link rel="stylesheet" type="text/css" href="/style.css"?>
 <zk>
 	<borderlayout hflex="1" vflex="1">
+
+		<!-- Cabecaçalho -->
 		<north height="50px" border="none">
 			<include src="/cabecalho.zul" />
 		</north>
+
+		<!-- Principal -->
 		<center id="mainContent" autoscroll="true"
 			apply="br.ufjf.hydronode.requisicoes.InsertSensor">
-			<vlayout>
-				<grid width="550px">
+
+			<vbox vflex="1" width="820px" align="center" spacing="10px"
+				sclass="demo-main">
+
+				<separator />
+
+				<div sclass="div-titulo">
+					<separator />
+					<label id="titulo" value="Registrar Sensor"
+						sclass="titulo" />
+					<separator />
+				</div>
+
+				<grid width="570px">
 					<columns>
 						<column align="right" hflex="min" />
 						<column />
 					</columns>
 					<rows>
 						<row>
-							<cell sclass="row-title">Procedure :</cell>
+							<cell sclass="row-title">ID da Estação :</cell>
 							<cell>
 								<textbox id="procedureName"
 									constraint="no empty: Campo obrigatório" width="400px" />
 							</cell>
 						</row>
 						<row>
-							<cell sclass="row-title">Long Name :</cell>
+							<cell sclass="row-title">Nome da Estação :</cell>
 							<cell>
 								<textbox id="longName"
 									constraint="no empty: Campo obrigatório" width="400px" />
 							</cell>
 						</row>
 						<row>
-							<cell sclass="row-title">Offering :</cell>
+							<cell sclass="row-title">ID do Sensor :</cell>
 							<cell>
 								<textbox id="offeringName"
 									constraint="no empty: Campo obrigatório" width="400px" />
@@ -36,7 +52,7 @@
 						</row>
 						<row>
 							<cell sclass="row-title">
-								Observable Property :
+								Propriedade Observada :
 							</cell>
 							<cell>
 								<textbox id="observableProperty"
@@ -45,7 +61,7 @@
 						</row>
 						<row>
 							<cell sclass="row-title">
-								Coordinates(x,y) :
+								Coordenadas(x,y) :
 							</cell>
 							<cell>
 								<hlayout>
@@ -70,7 +86,7 @@
 				<hlayout>
 
 				</hlayout>
-			</vlayout>
+			</vbox>
 		</center>
 
 		<!-- 		<south height="50px" border="none"> -->
