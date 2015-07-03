@@ -51,8 +51,7 @@ public class InsertSensor extends SelectorComposer<Component> {
 				+ offeringName.getValue();
 		String procedure = Config.urlServidor + Config.procedure
 				+ procedureName.getValue();
-		String obsProperty = Config.urlServidor + Config.observableProperty
-				+ observableProperty.getValue();
+		String obsProperty = observableProperty.getValue();
 		String sensor = Sensor.getSML(procedure, longName.getValue(),
 				offeringName.getValue(), offering, localizacaoX.getValue(),
 				localizacaoY.getValue(), localizacaoZ.getValue());

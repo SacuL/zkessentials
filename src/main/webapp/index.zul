@@ -7,28 +7,36 @@
 		<center id="mainContent" autoscroll="true">
 			<vbox vflex="1" hflex="1" align="center" spacing="20px"
 				sclass="demo-main">
-
-				<label value="Tela Inicial - Testes" sclass="head1" />
-
-				<label value="Gráficos Live" sclass="head2" />
-
-				<a href="/live/flashcharts.zul">Demo</a>
+				<separator />
+				<a href="/swe/sensor/">
 
 
-				<label value="Requisições JSON usando GSON"
-					sclass="head2" />
-				<vlayout>
-					<a href="/hydroserver/insertSensor.zul">
-						Insert Sensor
-					</a>
-					<a href="/hydroserver/insertObservation.zul">
-						Insert Observation
-					</a>
-				</vlayout>
+					<label value="HydroNode BETA"
+						sclass="titulo-pagina" />
 
-				<label value="SWE" sclass="head2" />
+				</a>
 
-				<a href="/swe/">Index</a>
+				<!-- 				<label value="Tela Inicial - Testes" sclass="head1" /> -->
+
+				<!-- 				<label value="Gráficos Live" sclass="head2" /> -->
+
+				<!-- 				<a href="/live/flashcharts.zul">Demo</a> -->
+
+
+				<!-- 				<label value="Requisições JSON usando GSON" -->
+				<!-- 					sclass="head2" /> -->
+				<!-- 				<vlayout> -->
+				<!-- 					<a href="/hydroserver/insertSensor.zul"> -->
+				<!-- 						Insert Sensor -->
+				<!-- 					</a> -->
+				<!-- 					<a href="/hydroserver/insertObservation.zul"> -->
+				<!-- 						Insert Observation -->
+				<!-- 					</a> -->
+				<!-- 				</vlayout> -->
+
+				<!-- 				<label value="SWE" sclass="head2" /> -->
+
+				<!-- 				<a href="/swe/">Index</a> -->
 
 			</vbox>
 		</center>
