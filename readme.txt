@@ -1,6 +1,6 @@
 Sistema HydroNode - Aplicação HydroNode
 
-Instruções de instalação do Sistema HydroNode estão no arquivo "Instruções.odt".
+Instruções de instalação do Sistema HydroNode estão no arquivo "Instruções.pdf".
   
   
   
